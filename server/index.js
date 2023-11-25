@@ -5,7 +5,9 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const dbConnection = require("./DBConnection/Dbconection.js");
 const auth = require("./Routes/auth");
-const story = require("./Routes/addstory")
+const story = require("./Routes/addstory");
+const bookmark = require("./Routes/bookmark");
+const like = require("./Routes/likes.js")
 const bodyParser = require("body-parser");
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -20,6 +22,9 @@ app.get("/", (req, resp) => {
 
 app.use(auth);
 app.use(story);
+app.use(bookmark);
+app.use(like)
+
 // connect to server
 app.listen(process.env.PORT, () => {
     dbConnection();
