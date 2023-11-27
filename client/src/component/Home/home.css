@@ -1,0 +1,133 @@
+.category-container {
+    width: 100%;
+    height: 30vh;
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: hidden;
+    padding: 15px 40px;
+    box-sizing: border-box;
+    gap: 4rem;
+  }
+  
+  .category-box {
+    flex: 0 0 11vw;
+    height: 22vh;
+    border-radius: 20px;
+    cursor: pointer;
+    background: linear-gradient(45deg, #e66485, #3ebdfc);
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .category-name {
+    margin-top: 40px;
+    color: #ffffff;
+    text-align: center;
+    font-family: DM Sans;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    text-transform: capitalize;
+  }
+  .stories-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    margin-top: 0px;
+  }
+  .category-title {
+    text-align: center;
+    color: #000;
+    text-align: center;
+    font-family: DM Sans;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+  .story-box {
+    width: 100vw;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-evenly;
+  }
+  .story-card {
+    margin-bottom: 20px;
+    width: 20vw;
+    height: 50vh;
+    cursor: pointer;
+    border-radius: 15px;
+  }
+  .category-box.selected {
+    border: 4px solid#00ACD2;
+  }
+  
+  .story-card img {
+    position: absolute;
+    width: 20vw;
+    height: 50vh;
+    border-radius: 15px;
+    filter: brightness(80%);
+  }
+  .story-title {
+    color: #fff;
+    font-family: DM Sans;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  
+    margin-left: 1vw;
+  }
+  .story-description {
+    margin-left: 1vw;
+  
+    color: #fff;
+    font-family: DM Sans;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+  .dark-shadow {
+    border-radius: 15px;
+    top: 29vh;
+    position: relative;
+    width: 20vw;
+    height: 18vh;
+    background: linear-gradient(360deg, #000 58.26%, rgba(0, 0, 0, 0) 100%);
+  }
+  .see-more {
+    width: 100px;
+    height: 35px;
+    margin-top: 10px;
+    border-radius: 20px;
+    background: #ff8484;
+    border: none;
+    color: #fff;
+    text-align: center;
+    font-family: DM Sans;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    cursor: pointer;
+  }
+  .edit-btn {
+    position: relative;
+    top: 26vh;
+    left: 7vw;
+    width: 79px;
+    height: 34px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    background-color: #fff;
+    color: black;
+    border-radius: 20px;
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.14);
+  }
