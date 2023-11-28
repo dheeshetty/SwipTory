@@ -8,7 +8,7 @@
     align-items: center;
     background: rgba(0, 0, 0, 0.88);
   }
-  .register-box {
+  .registerBox {
     width: 50vw;
     height: 70vh;
     background-color: white;
@@ -17,7 +17,8 @@
     background: #fff;
     box-shadow: 0px 4px 30px 0px rgba(255, 255, 255, 0.25);
   }
-  .register-contentbox p {
+  
+  .registerContentbox p {
     margin: auto;
     color: #ff0e0e;
     text-align: center;
@@ -27,16 +28,17 @@
     font-weight: 700;
     line-height: normal;
   }
-  .register-contentbox {
+  
+  .registerContentbox {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 5vh;
   }
-  .register-button {
+  
+  .registerButton {
     width: 100px;
     height: 30px;
-  
     border-radius: 15px;
     background: #73abff;
     color: #000000;
@@ -51,10 +53,12 @@
     padding: 5px 10px;
     margin-top: 6vh;
   }
-  .register-button:active {
+  
+  .registerButton:active {
     background-color: #4f96ff;
   }
-  .register-contentbox label {
+  
+  .registerContentbox label {
     color: #000;
     text-align: center;
     font-family: DM Sans;
@@ -64,22 +68,22 @@
     line-height: normal;
     margin: 20px 20px;
   }
-  .register-contentbox label input {
+  
+  .registerContentbox label input {
     position: relative;
     box-sizing: border-box;
     margin-left: 50px;
     width: 20vw;
     padding-left: 10px;
     height: 5vh;
-  
     color: #525151;
-  
     font-family: DM Sans;
     font-size: 12px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
   }
+  
   #cancelBtn {
     float: right;
     position: relative;
@@ -87,51 +91,50 @@
     right: 5vw;
     cursor: pointer;
   }
-  .eye-icon {
+  
+  .eyeIcon {
     width: 24px;
     margin-left: 2vw;
     transform: translateY(-110%);
-    
     float: right;
     position: relative;
     top: 5vh;
     right: 5vw;
     cursor: pointer;
   }
+  
   @media screen and (min-width: 1400px) {
-    .register-contentbox p {
+    .registerContentbox p {
       font-size: 19px;
     }
-    .register-button {
+    .registerButton {
       width: 120px;
       height: 40px;
-  
       font-size: 1.2rem;
     }
-  
-    .register-contentbox label {
+    .registerContentbox label {
       font-size: 1.2rem;
-  
       margin: 20px 40px;
     }
-    .register-contentbox label input {
+    .registerContentbox label input {
       font-size: 16px;
     }
-    .register-box img {
+    .registerBox img {
       float: right;
       position: relative;
       top: 4vh;
       right: 4vw;
       cursor: pointer;
     }
-    .eye-icon {
+    .eyeIcon {
       margin-left: 2vw;
       transform: translateY(-110%);
       cursor: pointer;
     }
   }
+  
   @media screen and (max-width: 750px) {
-    .register-box {
+    .registerBox {
       width: 80vw;
       height: 60vh;
       background-color: white;
@@ -140,18 +143,16 @@
       background: #fff;
       box-shadow: 0px 4px 30px 0px rgba(255, 255, 255, 0.25);
     }
-    .register-contentbox {
+    .registerContentbox {
       display: flex;
       flex-direction: column;
       align-items: center;
       margin-top: 3vh;
       margin-left: 6vw;
     }
-  
-    .register-button {
+    .registerButton {
       width: 140px;
       height: 35px;
-  
       border-radius: 15px;
       background: #73abff;
       color: #ffffff;
@@ -161,10 +162,7 @@
       font-style: normal;
       font-weight: 800;
     }
-  
-    .register-contentbox label {
-  
-   
+    .registerContentbox label {
       color: #000;
       text-align: center;
       font-family: DM Sans;
@@ -174,7 +172,7 @@
       line-height: normal;
       margin: 10px 10px;
     }
-    .register-contentbox label input {
+    .registerContentbox label input {
       position: relative;
       box-sizing: border-box;
       margin-left: 1px;
@@ -194,11 +192,10 @@
       right: 2vw;
       cursor: pointer;
     }
-    .eye-icon {
+    .eyeIcon {
       float: right;
       top: 5.5vh;
       right: 12vw;
       cursor: pointer;
-   
     }
   }

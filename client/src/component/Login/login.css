@@ -1,4 +1,4 @@
-.login-container {
+.loginContainer {
     position: absolute;
     width: 100vw;
     height: 100vh;
@@ -8,7 +8,8 @@
     align-items: center;
     background: rgba(0, 0, 0, 0.88);
   }
-  .login-box {
+  
+  .loginBox {
     width: 50vw;
     height: 70vh;
     background-color: white;
@@ -17,13 +18,15 @@
     background: #fff;
     box-shadow: 0px 4px 30px 0px rgba(255, 255, 255, 0.25);
   }
-  .login-contentbox {
+  
+  .loginContentBox {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 5vh;
   }
-  .login-contentbox p {
+  
+  .loginContentBox p {
     margin: auto;
     color: #ff0e0e;
     text-align: center;
@@ -33,10 +36,10 @@
     font-weight: 700;
     line-height: normal;
   }
-  .login-button {
+  
+  .loginButton {
     width: 100px;
     height: 30px;
-  
     border-radius: 15px;
     background: #73abff;
     color: #000000;
@@ -51,10 +54,12 @@
     padding: 5px 10px;
     margin-top: 2vh;
   }
-  .login-button:active {
+  
+  .loginButton:active {
     background-color: #4f96ff;
   }
-  .login-contentbox label {
+  
+  .loginContentBox label {
     color: #000;
     text-align: center;
     font-family: DM Sans;
@@ -64,31 +69,32 @@
     line-height: normal;
     margin: 20px 20px;
   }
-  .login-contentbox label input {
+  
+  .loginContentBox label input {
     position: relative;
     box-sizing: border-box;
     margin-left: 50px;
     width: 20vw;
     padding-left: 10px;
     height: 5vh;
-  
     color: #979595;
-  
     font-family: DM Sans;
     font-size: 12px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
   }
-  #cancelBtn {
+  
+  .cancelBtn {
     float: right;
     position: relative;
     top: 5vh;
     right: 5vw;
     cursor: pointer;
   }
-  .eye-icon { 
-     width: 24px;
+  
+  .eyeIcon {
+    width: 24px;
     margin-left: 2vw;
     transform: translateY(-110%);
     float: right;
@@ -97,40 +103,44 @@
     right: 5vw;
     cursor: pointer;
   }
+  
   @media screen and (min-width: 1400px) {
-    .login-contentbox p {
+    .loginContentBox p {
       font-size: 19px;
     }
-    .login-button {
+  
+    .loginButton {
       width: 120px;
       height: 40px;
-  
       font-size: 1.2rem;
     }
   
-    .login-contentbox label {
+    .loginContentBox label {
       font-size: 1.2rem;
-  
       margin: 20px 40px;
     }
-    .login-contentbox label input {
+  
+    .loginContentBox label input {
       font-size: 16px;
     }
-    #cancelBtn {
+  
+    .cancelBtn {
       float: right;
       position: relative;
       top: 4vh;
       right: 4vw;
       cursor: pointer;
     }
-    .eye-icon {
+  
+    .eyeIcon {
       margin-left: 2vw;
       transform: translateY(-110%);
       cursor: pointer;
     }
   }
+  
   @media screen and (max-width: 750px) {
-    .login-box {
+    .loginBox {
       width: 80vw;
       height: 60vh;
       background-color: white;
@@ -139,7 +149,8 @@
       background: #fff;
       box-shadow: 0px 4px 30px 0px rgba(255, 255, 255, 0.25);
     }
-    .login-contentbox {
+  
+    .loginContentBox {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -147,10 +158,9 @@
       margin-left: 6vw;
     }
   
-    .login-button {
+    .loginButton {
       width: 140px;
       height: 35px;
-  
       border-radius: 15px;
       background: #73abff;
       color: #ffffff;
@@ -161,9 +171,7 @@
       font-weight: 800;
     }
   
-    .login-contentbox label {
-  
-   
+    .loginContentBox label {
       color: #000;
       text-align: center;
       font-family: DM Sans;
@@ -173,7 +181,8 @@
       line-height: normal;
       margin: 10px 10px;
     }
-    .login-contentbox label input {
+  
+    .loginContentBox label input {
       position: relative;
       box-sizing: border-box;
       margin-left: 1px;
@@ -186,18 +195,20 @@
       font-family: DM Sans;
       font-size: 15px;
     }
-    #cancelBtn {
+  
+    .cancelBtn {
       float: right;
       position: relative;
       top: 1vh;
       right: 2vw;
       cursor: pointer;
     }
-    .eye-icon {
+  
+    .eyeIcon {
       float: right;
       top: 5.5vh;
       right: 12vw;
       cursor: pointer;
-   
     }
   }
+  

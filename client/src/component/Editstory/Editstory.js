@@ -17,30 +17,28 @@ const EditStory = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [story, setStory] = useState([initialSlide]);
+
   useEffect(() => {
     setIsLoading(true);
     const fetchUserStories = async () => {
       try {
         const jwtToken = localStorage.getItem("token");
-
-        const response = await axios.get(
-          `https://swiptory-backend.onrender.com/api/story/edit/${id}`,
-          {
-            headers: {
-              Authorization: jwtToken,
-            },
-          }
-        );
+        const response = await axios.get(`https://swiptory-backend.onrender.com/edit/${id}`, {
+          headers: {
+            Authorization: jwtToken,
+          },
+        });
 
         const foundStory = response.data.story.slides;
         setIsLoading(false);
+
         if (foundStory) {
           setStory(foundStory);
         } else {
           setErrors("Story not found");
         }
       } catch (error) {
-        console.error("Error fetching story:", error.response.data);
+        toast("Error fetching story", error.response.data);
       }
     };
 
@@ -57,6 +55,7 @@ const EditStory = () => {
       return updatedSlides;
     });
   };
+
   const handleNextSlide = () => {
     if (currentSlide < story.length - 1) {
       setCurrentSlide((prevIndex) => prevIndex + 1);
@@ -72,11 +71,9 @@ const EditStory = () => {
   const handlePostStory = async () => {
     try {
       const slides = story;
-
       const jwtToken = localStorage.getItem("token");
-
       const response = await axios.put(
-        `https://swiptory-backend.onrender.com/api/story/edit/${id}`,
+        `https://swiptory-backend.onrender.com/edit/${id}`,
         { slides },
         {
           headers: {
@@ -91,7 +88,7 @@ const EditStory = () => {
         navigate("/");
       }
     } catch (error) {
-      console.error("Error editing story:", error.response.data);
+      toast("Error editing story", error.response.data);
     }
   };
 
@@ -101,78 +98,90 @@ const EditStory = () => {
 
   return (
     <>
-      <div className="editstory-container">
-        <div className="editstory-box">
+      <div className={styles.editstoryContainer}>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+        <div className={styles.editstoryBox}>
           <img src={cancel} alt="cancel-icon" onClick={cancelButton} />
-          <div id="heading2">Edit Story</div>
-          <div className="slide-btn-container">
+          <div id={styles.heading2}>Edit Story</div>
+          <div className={styles.slideBtnContainer}>
             {story.map((_, index) => (
               <div
                 key={index}
-                className={`slide-btn ${
-                  currentSlide === index ? "active" : ""
+                className={`${styles.slideBtn} ${
+                  currentSlide === index ? styles.active : ""
                 }`}
               >
                 Slide {index + 1}
               </div>
             ))}
           </div>
-          <div className="editstory-contentbox">
+          <div className={styles.editstoryContentBox}>
             {!isLoading ? (
               <>
-            <div>
-              <label>Heading:</label>
-              <input
-                type="text"
-                name="slideHeading"
-                value={story[currentSlide].slideHeading}
-                onChange={handleChange}
-                placeholder="Your heading"
-                className="editstory-input"
-              />
-            </div>
-            <div>
-              <label>Description:</label>
-              <input
-                type="text"
-                name="slideDescription"
-                value={story[currentSlide].slideDescription}
-                onChange={handleChange}
-                placeholder="Story description"
-                className="editstory-input"
-                style={{ height: "80px" }}
-              />
-            </div>
-            <div>
-              <label>Image:</label>
-              <input
-                type="text"
-                name="slideImageUrl"
-                value={story[currentSlide].slideImageUrl}
-                onChange={handleChange}
-                placeholder="Add image url"
-                className="editstory-input"
-              />
-            </div>
-            <div>
-              <label>Category:</label>
-              <select
-                name="category"
-                value={story[currentSlide].category}
-                onChange={handleChange}
-              >
-                <option value="" defaultChecked>
-                  Select Category
-                </option>
-                  <option value="food">Food</option>
-                  <option value="health and fitness">
-                  Health and Fitness
-                </option>
-                <option value="travel">Travel</option>
-                <option value="movies">Movies</option>
-                <option value="education">Education</option>
-              </select>
-                </div>{" "}
+                <div>
+                  <label>Heading:</label>
+                  <input
+                    type="text"
+                    name="slideHeading"
+                    value={story[currentSlide].slideHeading}
+                    onChange={handleChange}
+                    placeholder="Your heading"
+                    className={styles.editstoryInput}
+                  />
+                </div>
+                <div>
+                  <label>Description:</label>
+                  <input
+                    type="text"
+                    name="slideDescription"
+                    value={story[currentSlide].slideDescription}
+                    onChange={handleChange}
+                    placeholder="Story description"
+                    className={styles.editstoryInput}
+                    style={{ height: "80px" }}
+                  />
+                </div>
+                <div>
+                  <label>Image:</label>
+                  <input
+                    type="text"
+                    name="slideImageUrl"
+                    value={story[currentSlide].slideImageUrl}
+                    onChange={handleChange}
+                    placeholder="Add image url"
+                    className={styles.editstoryInput}
+                  />
+                </div>
+                <div>
+                  <label>Category:</label>
+                  <select
+                    name="category"
+                    value={story[currentSlide].category}
+                    onChange={handleChange}
+                  >
+                    <option value="" defaultChecked>
+                      Select Category
+                    </option>
+                    <option value="food">Food</option>
+                    <option value="health and fitness">
+                      Health and Fitness
+                    </option>
+                    <option value="travel">Travel</option>
+                    <option value="movies">Movies</option>
+                    <option value="education">Education</option>
+                  </select>
+                </div>
               </>
             ) : (
               <h2>Loading...</h2>
@@ -181,16 +190,19 @@ const EditStory = () => {
           <p style={{ color: "red", marginLeft: "8rem", marginTop: "0" }}>
             {error && <span> {error}</span>}
           </p>
-          <div className="editstory-buttons-box">
+          <div className={styles.editstoryButtonsBox}>
             <div>
-              <button className="previous-btn" onClick={handlePreviousSlide}>
+              <button
+                className={styles.previousBtn}
+                onClick={handlePreviousSlide}
+              >
                 Previous
               </button>
-              <button className="next-btn" onClick={handleNextSlide}>
+              <button className={styles.nextBtn} onClick={handleNextSlide}>
                 Next
               </button>
             </div>
-            <button className="post-btn" onClick={handlePostStory}>
+            <button className={styles.postBtn} onClick={handlePostStory}>
               Save
             </button>
           </div>

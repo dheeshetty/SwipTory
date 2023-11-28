@@ -14,7 +14,7 @@ const AddStory = () => {
     category: "",
   };
 
-  const [currentSlide, SetCurrentSlide] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [story, setStory] = useState([initialSlide]);
 
   const handleChange = (e) => {
@@ -30,13 +30,13 @@ const AddStory = () => {
 
   const handleNextSlide = () => {
     if (currentSlide < story.length - 1) {
-      SetCurrentSlide((prevIndex) => prevIndex + 1);
+      setCurrentSlide((prevIndex) => prevIndex + 1);
     }
   };
 
   const handlePreviousSlide = () => {
     if (currentSlide > 0) {
-      SetCurrentSlide((prevIndex) => prevIndex - 1);
+      setCurrentSlide((prevIndex) => prevIndex - 1);
     }
   };
 
@@ -62,43 +62,58 @@ const AddStory = () => {
         navigate("/");
       }
     } catch (error) {
-      console.error("Error adding story:", error.response.data);
+      toast("something went wrong, please try again", error.response.data);
     }
   };
+
   const handleAddSlide = () => {
     setErrors("");
     if (story.length < 6) {
       setStory((prevState) => [...prevState, initialSlide]);
-      SetCurrentSlide(story.length);
+      setCurrentSlide(story.length);
     }
   };
+
   const cancelButton = () => {
     navigate("/");
   };
+
   return (
     <>
-      <div className="addstory-container">
-        <div className="addstory-box">
+      <div className={styles.addstoryContainer}>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+        <div className={styles.addstoryBox}>
           <img src={cancel} alt="cancel-icon" onClick={cancelButton} />
-          <div id="heading2">Add up to 6 slides</div>
-          <div className="slide-btn-container">
+          <div id={styles.heading2}>Add up to 6 slides</div>
+          <div className={styles.slideBtnContainer}>
             {story.map((_, index) => (
               <div
                 key={index}
-                className={`slide-btn ${
-                  currentSlide === index ? "active" : ""
+                className={`${styles.slideBtn} ${
+                  currentSlide === index ? styles.active : ""
                 }`}
               >
                 Slide {index + 1}
               </div>
             ))}
             {story.length < 6 && (
-              <div className="slide-btn" onClick={handleAddSlide}>
+              <div className={styles.slideBtn} onClick={handleAddSlide}>
                 Add +
               </div>
             )}
           </div>
-          <div className="addstory-contentbox">
+          <div className={styles.addstoryContentBox}>
             <div>
               <label>Heading:</label>
               <input
@@ -107,7 +122,7 @@ const AddStory = () => {
                 value={story[currentSlide].slideHeading}
                 onChange={handleChange}
                 placeholder="Your heading"
-                className="addstory-input"
+                className={styles.addstoryInput}
               />
             </div>
             <div>
@@ -118,7 +133,7 @@ const AddStory = () => {
                 value={story[currentSlide].slideDescription}
                 onChange={handleChange}
                 placeholder="Story description"
-                className="addstory-input"
+                className={styles.addstoryInput}
                 style={{ height: "80px" }}
               />
             </div>
@@ -130,7 +145,7 @@ const AddStory = () => {
                 value={story[currentSlide].slideImageUrl}
                 onChange={handleChange}
                 placeholder="Add image url"
-                className="addstory-input"
+                className={styles.addstoryInput}
               />
             </div>
             <div>
@@ -151,19 +166,22 @@ const AddStory = () => {
               </select>
             </div>
           </div>
-          <p style={{ color: "red", marginLeft: "8rem",marginTop:'0' }}>
+          <p style={{ color: "red", marginLeft: "8rem", marginTop: "0" }}>
             {error && <span> {error}</span>}
           </p>
-          <div className="addstory-buttons-box">
+          <div className={styles.addstoryButtonsBox}>
             <div>
-              <button className="previous-btn" onClick={handlePreviousSlide}>
+              <button
+                className={styles.previousBtn}
+                onClick={handlePreviousSlide}
+              >
                 Previous
               </button>
-              <button className="next-btn" onClick={handleNextSlide}>
+              <button className={styles.nextBtn} onClick={handleNextSlide}>
                 Next
               </button>
             </div>
-            <button className="post-btn" onClick={handlePostStory}>
+            <button className={styles.postBtn} onClick={handlePostStory}>
               Post
             </button>
           </div>

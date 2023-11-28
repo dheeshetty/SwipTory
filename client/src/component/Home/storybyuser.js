@@ -43,9 +43,20 @@ const Storybyuser = () => {
   };
   const storyLength = stories.map((story) => story.slides).flat();
 
+  const [storyCardData, setStoryCardData] = useState();
+  const handleSlide = async (storySlideId) => {
+    const slidesByCategory = stories.flatMap((story) => story.slides);
+    setStoryCardData(slidesByCategory);
+    setTimeout(() => {
+      navigate(`/story/${storySlideId}`);
+    }, 0);
+  };
+  useEffect(() => {
+    localStorage.setItem("storyCardData", JSON.stringify(storyCardData));
+  }, [storyCardData]);
   return (
     <>
-      <div className="stories-container">
+      <div className={styles.storiesContainer}>
         <ToastContainer
           position="top-right"
           autoClose={5000}
@@ -59,7 +70,7 @@ const Storybyuser = () => {
           theme="light"
         />
 
-        <h2 className="category-title">Your Stories</h2>
+        <h2 className={styles.categoryTitle}>Your Stories</h2>
         {isLoading ? (
           <img src={loadingbar} alt="loadingbar" />
         ) : storyLength.length === 0 ? (
@@ -67,46 +78,51 @@ const Storybyuser = () => {
             Please add your new story.
           </p>
         ) : (
-          <div className="story-box">
-            {stories
-              .flatMap((story) => story.slides)
-              .slice(0, visibleSlides)
-              .map((item, slideIndex) => (
-                <div key={slideIndex} className="story-card">
-                  <img
-                    src={item.slideImageUrl}
-                    alt="storypic"
-                    onClick={() => navigate(`/story/${item._id}`)}
-                  />
-                  <div
-                    className="dark-shadow"
-                    onClick={() => navigate(`/story/${item._id}`)}
-                  >
-                    <h3 className="story-title">{item.slideHeading}</h3>
-                    <div className="story-description">
-                      {item.slideDescription.split(" ").slice(0, 16).join(" ") +
-                        "..."}
+          <div className={styles.storyBoxContainer}>
+            <div className={styles.storyBox}>
+              {stories
+                .flatMap((story) => story.slides)
+                .slice(0, visibleSlides)
+                .map((item, slideIndex) => (
+                  <div key={slideIndex} className={styles.storyCard}>
+                    <img
+                      src={item.slideImageUrl}
+                      alt="storypic"
+                      onClick={() => handleSlide(item._id)}
+                    />
+                    <div
+                      className={styles.darkShadow}
+                      onClick={() => handleSlide(item._id)}
+                    >
+                      <div className={styles.storyTitle}>
+                        {item.slideHeading}
+                      </div>
+                      <div className={styles.storyDescription}>
+                        {item.slideDescription
+                          .split(" ")
+                          .slice(0, 16)
+                          .join(" ") + "..."}
+                      </div>
                     </div>
+                    <Link to={`/editstory/${item._id}`}>
+                      <button className={styles.editBtn}>&#x270E;Edit</button>
+                    </Link>
                   </div>
-                  <Link to={`/editstory/${item._id}`}>
-                    <button className="edit-btn">&#x270E;Edit</button>
-                  </Link>
-                </div>
-              ))}
+                ))}
+            </div>
+            <div className={styles.seeMoreLess}>
+              {visibleSlides === 4 ? (
+                <button onClick={handleSeeMore} className={styles.seeMore}>
+                  See more
+                </button>
+              ) : (
+                <button onClick={handleSeeLess} className={styles.seeMore}>
+                  See less
+                </button>
+              )}
+            </div>
           </div>
         )}
-
-        <div className="see-more-less">
-          {visibleSlides === 4 ? (
-            <button onClick={handleSeeMore} className="see-more">
-              See more
-            </button>
-          ) : (
-            <button onClick={handleSeeLess} className="see-more">
-              See less
-            </button>
-          )}
-        </div>
       </div>
     </>
   );

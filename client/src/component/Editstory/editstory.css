@@ -1,4 +1,4 @@
-.editstory-container {
+.editstoryContainer {
     position: absolute;
     width: 100vw;
     height: 100vh;
@@ -8,19 +8,22 @@
     align-items: center;
     background: rgba(0, 0, 0, 0.88);
   }
-  .slide-btn.active {
+  
+  .slideBtn.active {
     border: 2px solid #73abff;
   }
-  .editstory-box {
+  
+  .editstoryBox {
     width: 50vw;
     height: 80vh;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     margin: auto;
     border-radius: 20px;
     background: #fff;
     box-shadow: 0px 4px 30px 0px rgba(255, 255, 255, 0.25);
   }
-  .slide-btn-container {
+  
+  .slideBtnContainer {
     width: 35vw;
     display: flex;
     gap: 1rem;
@@ -28,12 +31,12 @@
     top: 8vh;
     left: 5vw;
   }
-  .slide-btn {
+  
+  .slideBtn {
     cursor: pointer;
     width: 76px;
     height: 61px;
     border-radius: 10px;
-  
     background: #fff;
     box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.1);
     color: #000;
@@ -46,19 +49,22 @@
     box-sizing: border-box;
     padding-top: 20px;
   }
-  .editstory-contentbox {
+  
+  .editstoryContentBox {
     display: flex;
     flex-direction: column;
     width: 34vw;
     margin-top: 10vh;
     margin-left: 6vw;
   }
-  .editstory-contentbox div {
+  
+  .editstoryContentBox div {
     display: flex;
     justify-content: space-between;
     margin: 10px;
   }
-  .editstory-contentbox div label {
+  
+  .editstoryContentBox div label {
     color: #000;
     text-align: center;
     font-family: DM Sans;
@@ -67,43 +73,44 @@
     font-weight: 700;
     line-height: normal;
   }
-  .editstory-contentbox div select {
+  
+  .editstoryContentBox div select {
     width: 19vw;
     height: 35px;
     padding-left: 10px;
     border: 2px solid #000;
     background: #fff;
-  
     color: #474141;
-  
     font-family: DM Sans;
     font-size: 15px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
   }
-  .editstory-input {
+  
+  .editstoryInput {
     width: 18vw;
     height: 30px;
     padding-left: 10px;
     border: 2px solid #000;
     background: #fff;
     color: #474141;
-  
     font-family: DM Sans;
     font-size: 15px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
   }
-  .editstory-buttons-box {
+  
+  .editstoryButtonsBox {
     margin-top: 15px;
     margin-left: 6vw;
     width: 40vw;
     display: flex;
     justify-content: space-between;
   }
-  .next-btn {
+  
+  .nextBtn {
     width: 100px;
     height: 35px;
     border-radius: 20px;
@@ -118,10 +125,12 @@
     border: none;
     cursor: pointer;
   }
-  .next-btn:active {
+  
+  .nextBtn:active {
     background-color: #4b91fb;
   }
-  .previous-btn {
+  
+  .previousBtn {
     width: 100px;
     height: 35px;
     border-radius: 20px;
@@ -137,10 +146,12 @@
     cursor: pointer;
     margin-right: 15px;
   }
-  .previous-btn:active {
+  
+  .previousBtn:active {
     background-color: #59dc4d;
   }
-  .post-btn {
+  
+  .postBtn {
     width: 100px;
     height: 35px;
     border-radius: 20px;
@@ -155,10 +166,12 @@
     border: none;
     cursor: pointer;
   }
-  .post-btn:active {
+  
+  .postBtn:active {
     background-color: #e85454;
   }
-  .heading2 {
+  
+  #heading2 {
     position: relative;
     left: 10px;
     top: 12vh;
@@ -171,69 +184,65 @@
     font-weight: 700;
     line-height: normal;
   }
-  .editstory-box img {
+  
+  .editstoryBox img {
     display: inline;
     position: relative;
     float: right;
     margin: 5px 5px;
     cursor: pointer;
   }
+  
   @media screen and (min-width: 1400px) {
-    .editstory-contentbox {
+    .editstoryContentBox {
       display: flex;
       flex-direction: column;
       width: 34vw;
       margin-top: 10vh;
       margin-left: 6vw;
     }
-    .slide-btn {
+  
+    .slideBtn {
       font-size: 16px;
     }
-    .editstory-contentbox div label {
+  
+    .editstoryContentBox div label {
       font-size: 24px;
     }
-    .editstory-contentbox div select {
+  
+    .editstoryContentBox div select {
       width: 20vw;
       height: 36px;
-  
       font-size: 18px;
     }
-    .editstory-input {
+  
+    .editstoryInput {
       width: 19vw;
       height: 34px;
-  
       font-size: 18px;
     }
-    .editstory-buttons-box {
+  
+    .editstoryButtonsBox {
       margin-top: 25px;
       margin-left: 6vw;
       width: 40vw;
       display: flex;
       justify-content: space-between;
     }
-    .next-btn {
-      width: 120px;
-      height: 40px;
-      font-size: 1.2rem;
-      border-radius: 20px;
-      background: #73abff;
-      color: #fff;
-      text-align: center;
-      font-family: DM Sans;
-      font-style: normal;
-      font-weight: 700;
-      line-height: normal;
-      border: none;
-      cursor: pointer;
-    }
   
-    .previous-btn {
+    .nextBtn {
       width: 120px;
       height: 40px;
       font-size: 1.2rem;
     }
   
-    .post-btn {
+    .previousBtn {
+      width: 120px;
+      height: 40px;
+      font-size: 1.2rem;
+    }
+  
+    .postBtn {
       width: 120px;
       height: 40px;
       font-size: 1.2rem;
@@ -243,21 +252,19 @@
       font-size: 16px;
     }
   }
-
+  
   @media screen and (max-width: 750px) {
- 
-    .editstory-box {
+    .editstoryBox {
       width: 90vw;
       height: 86vh;
       background-color: white;
-  
       margin: auto;
       border-radius: 20px;
       background: #fff;
       box-shadow: 0px 4px 30px 0px rgba(255, 255, 255, 0.25);
     }
-    .slide-btn-container {
-     
+  
+    .slideBtnContainer {
       width: 80vw;
       display: flex;
       gap: 0.6rem;
@@ -265,13 +272,12 @@
       top: 2vh;
       left: 5vw;
     }
-    .slide-btn {
+  
+    .slideBtn {
       cursor: pointer;
       width: 50px;
       height: 50px;
       border-radius: 10px;
-  
-    
       background: #ffffff;
       box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.1);
       color: #000;
@@ -285,17 +291,18 @@
       padding-top: 15px;
       box-sizing: border-box;
     }
-    .editstory-contentbox {
-     
+  
+    .editstoryContentBox {
       width: 80vw;
       margin-top: 4vh;
       margin-left: 5vw;
     }
-    .editstory-contentbox div {
-    
+  
+    .editstoryContentBox div {
       margin: 10px;
     }
-    .editstory-contentbox div label {
+  
+    .editstoryContentBox div label {
       color: #000;
       text-align: center;
       font-family: DM Sans;
@@ -304,43 +311,44 @@
       font-weight: 700;
       line-height: normal;
     }
-    .editstory-contentbox div select {
+  
+    .editstoryContentBox div select {
       width: 40vw;
       height: 35px;
       padding-left: 10px;
       border: 2px solid #000;
       background: #fff;
-   
       color: #474141;
-    
       font-family: DM Sans;
       font-size: 12px;
       font-style: normal;
       font-weight: 700;
       line-height: normal;
     }
-    .editstory-input {
+  
+    .editstoryInput {
       width: 40vw;
       height: 30px;
       padding-left: 10px;
       border: 2px solid #000;
       background: #fff;
       color: #474141;
-    
       font-family: DM Sans;
       font-size: 15px;
       font-style: normal;
       font-weight: 700;
       line-height: normal;
     }
-    .editstory-buttons-box {
+  
+    .editstoryButtonsBox {
       margin-top: 15px;
       margin-left: 6vw;
       width: 80vw;
       display: flex;
       justify-content: space-between;
     }
-    .next-btn {
+  
+    .nextBtn {
       width: 100px;
       height: 35px;
       border-radius: 20px;
@@ -355,10 +363,12 @@
       border: none;
       cursor: pointer;
     }
-    .next-btn:active {
+  
+    .nextBtn:active {
       background-color: #4b91fb;
     }
-    .previous-btn {
+  
+    .previousBtn {
       width: 100px;
       height: 35px;
       border-radius: 20px;
@@ -374,10 +384,12 @@
       cursor: pointer;
       margin-right: 15px;
     }
-    .previous-btn:active {
+  
+    .previousBtn:active {
       background-color: #59dc4d;
     }
-    .post-btn {
+  
+    .postBtn {
       width: 100px;
       height: 35px;
       border-radius: 20px;
@@ -392,14 +404,14 @@
       border: none;
       cursor: pointer;
     }
-    .post-btn:active {
+  
+    .postBtn:active {
       background-color: #e85454;
     }
+  
     #heading2 {
-      
-    
       top: 4vh;
-      float:none;
+      float: none;
       color: #474141;
       text-align: center;
       font-family: DM Sans;
@@ -408,7 +420,8 @@
       font-weight: 700;
       line-height: normal;
     }
-    .editstory-box img {
+  
+    .editstoryBox img {
       display: inline;
       position: relative;
       float: right;

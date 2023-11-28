@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import styles from "../Home/home.css";
 import Navbar from "../Navbar/header";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -12,13 +13,14 @@ const Bookmark = () => {
   const [isLoading, setIsLoading] = useState(false);
   const isLoggedIn = !!localStorage.getItem("token");
   const navigate = useNavigate();
+
   useEffect(() => {
     setIsLoading(true);
     const fetchBookmarkedStories = async () => {
       try {
         const jwtToken = localStorage.getItem("token");
         const response = await axios.get(
-          "https://swiptory-faqj.onrender.com/bookmarks",
+          `https://swiptory-backend.onrender.com/bookmarkedslides`,
           {
             headers: {
               Authorization: jwtToken,
@@ -43,7 +45,17 @@ const Bookmark = () => {
   const handleSeeLess = () => {
     setVisibleStories(4);
   };
-
+    const [storyCardData, setStoryCardData] = useState();
+    const handleSlide = async (storySlideId) => {
+      const slidesByCategory = bookmarkedStories;
+      setStoryCardData(slidesByCategory);
+      setTimeout(() => {
+        navigate(`/story/${storySlideId}`);
+      }, 0);
+    };
+    useEffect(() => {
+      localStorage.setItem("storyCardData", JSON.stringify(storyCardData));
+    }, [storyCardData]);
   return (
     <>
       <ToastContainer
@@ -63,34 +75,45 @@ const Bookmark = () => {
       ) : (
         <div>
           <Navbar />
-        {!isLoading ? (
-          <div className="stories-container">
-            <h2 className="category-title">Your Bookmarks</h2>
-            <div className="story-box">
-              {bookmarkedStories.slice(0, visibleStories).map((story, i) => (
+    {!isLoading ? (
+      <div className={styles.storiesContainer}>
+        <h2 className={styles.categoryTitle}>Your Bookmarks</h2>
+        {bookmarkedStories.error === "No bookmarked slides found" ? (
+          <p>No bookmarked story</p>
+        ) : (
+          <div className={styles.storyBox}>
+            {bookmarkedStories
+              .slice(0, visibleStories)
+              .map((story, i) => (
                 <div
                   key={i}
-                  className="story-card"
-                  onClick={() => navigate(`/story/${story._id}`)}
+                  className={styles.storyCard}
+                  onClick={() => handleSlide(story._id)}
                 >
                   <img src={story.slideImageUrl} alt="foodpic" />
-                  <div className="dark-shadow">
-                    <h3 className="story-title">{story.slideHeading}</h3>
-                    <h4 className="story-description">
-                      {story.slideDescription}
+                  <div className={styles.darkShadow}>
+                    <h3 className={styles.storyTitle}>
+                      {story.slideHeading}
+                    </h3>
+                    <h4 className={styles.storyDescription}>
+                      {story.slideDescription
+                        .split(" ")
+                        .slice(0, 16)
+                        .join(" ") + "..."}
                     </h4>
                   </div>
                 </div>
               ))}
-            </div>
+          </div>
+            )}
             {bookmarkedStories.length > 4 && (
-              <div className="see-more-less">
+              <div className={styles.seeMoreLess}>
                 {visibleStories === 4 ? (
-                  <button onClick={handleSeeMore} className="see-more">
+                  <button onClick={handleSeeMore} className={styles.seeMore}>
                     See more
                   </button>
                 ) : (
-                  <button onClick={handleSeeLess} className="see-more">
+                  <button onClick={handleSeeLess} className={styles.seeMore}>
                     See less
                   </button>
                 )}
@@ -101,7 +124,7 @@ const Bookmark = () => {
             <img
               src={loadingbar}
               alt="loadingbar"
-              style={{ margin: "200px 580px" }}
+              className={styles.loadingbar}
             />
           )}
         </div>

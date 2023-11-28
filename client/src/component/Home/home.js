@@ -23,9 +23,7 @@ const Home = () => {
     setIsLoading(true);
     async function fetchCategories() {
       try {
-        const response = await axios.get(
-          "https://swiptory-faqj.onrender.com/categories"
-        );
+        const response = await axios.get("https://swiptory-faqj.onrender.com/categories");
 
         setCategories(response.data.categories);
         setIsLoading(false);
@@ -66,10 +64,22 @@ const Home = () => {
   const handleCategoryClick = (categoryName) => {
     setSelectedCategory(categoryName);
   };
-
+  const [storyCardData, setStoryCardData] = useState();
+  const handleSlide = async (storySlideId, slideCategoryName) => {
+    const slidesByCategory = await categories[slideCategoryName].flatMap(
+      (storiesArray) => storiesArray
+    );
+    setStoryCardData(slidesByCategory);
+    setTimeout(() => {
+      navigate(`/story/${storySlideId}`);
+    }, 0);
+  };
+  useEffect(() => {
+    localStorage.setItem("storyCardData", JSON.stringify(storyCardData));
+  }, [storyCardData]);
   return (
     <>
-      <div className="home-container">
+      <div className={styles.homeContainer}>
         <ToastContainer
           position="top-right"
           autoClose={5000}
@@ -82,121 +92,136 @@ const Home = () => {
           pauseOnHover
           theme="light"
         />
-        <div className="category-container">
+        <div className={styles.categoryContainer}>
           <div
-            className="category-box"
+            className={styles.categoryBox}
             onClick={() => setSelectedCategory("All")}
             style={
               selectedCategory === "All" ? { border: "5px solid #00ACD2" } : {}
             }
           >
-            <h1 className="category-name">All</h1>
+            <h1 className={styles.categoryName}>All</h1>
           </div>
           {category.map((data, index) => (
             <div
               key={index}
-              className="category-box"
+              className={styles.categoryBox}
               style={{
-                backgroundImage: `url(${data.image})`,
-                border:
-                  selectedCategory === data.category ? "5px solid #00ACD2" : "",
+              backgroundImage: `url(${data.image})`,
+              border:
+              selectedCategory === data.category ? "5px solid #00ACD2" : "",
               }}
               onClick={() => handleCategoryClick(data.category)}
             >
-              <h1 className="category-name">{data.category}</h1>
+              <h1 className={styles.categoryName}>{data.category}</h1>
             </div>
           ))}
         </div>
         {isLoading ? (
-          <img src={loadingbar} alt="loadingbar" className="loadingbar" />
+          <img
+            src={loadingbar}
+            alt="loadingbar"
+            className={styles.loadingbar}
+          />
         ) : (
-          <div className="stories-container">
+          <div className={styles.storiesContainer}>
             {!isLoggedIn || selectedCategory !== "All" ? "" : <Storybyuser />}
 
             {selectedCategory === "All" ? (
               Object.keys(categories).map((categoryName, index) => (
-                <>
-                  <h2 className="category-title">
+              <React.Fragment key={index}>
+                  <h2 className={styles.categoryTitle}>
                     Top stories about {categoryName}
                   </h2>
-                  <div className="story-box">
-                    {categories[categoryName]
-                      .flatMap((storiesArray) => storiesArray)
-                      .slice(0, showMore[categoryName] ? undefined : 4)
-                      .map((story, storyIndex) => (
-                        <div key={storyIndex} className="story-card">
-                          <img
-                            src={story.slideImageUrl}
-                            alt="storypic"
-                            onClick={() => navigate(`/story/${story._id}`)}
-                          />
-                          <div
-                            className="dark-shadow"
-                            onClick={() => navigate(`/story/${story._id}`)}
-                          >
-                            <h3 className="story-title">
-                              {story.slideHeading}
-                            </h3>
-                            <div className="story-description">
-                              {story.slideDescription
-                                .split(" ")
-                                .slice(0, 16)
-                                .join(" ") + "..."}
-                            </div>
-                          </div>
-                          {slideByUser.includes(story._id) ? (
-                            <Link to={`/editstory/${story._id}`}>
-                              <button className="edit-btn">&#x270E;Edit</button>
-                            </Link>
-                          ) : (
-                            ""
-                          )}
-                        </div>
-                      ))}
-                  </div>
+            <div className={styles.storyBox}>
+              {categories[categoryName]
+              .flatMap((storiesArray) => storiesArray)
+              .slice(0, showMore[categoryName] ? undefined : 4)
+              .map((story, storyIndex) => (
+              <div key={storyIndex} className={styles.storyCard}>
+              <img
+                src={story.slideImageUrl}
+                alt="storypic"
+                onClick={() => handleSlide(story._id, categoryName)}
+              />
+            <div
+                className={styles.darkShadow}
+                onClick={() => handleSlide(story._id, categoryName)}
+                >
+                <div className={styles.storyTitle}>
+                {story.slideHeading}
+                </div>
+                <div className={styles.storyDescription}>
+                {story.slideDescription
+                .split(" ")
+                .slice(0, 16)
+                .join(" ") + "..."}
+              </div>
+              </div>
+
+                {slideByUser.includes(story._id) ? (
+                <Link to={`/editstory/${story._id}`}>
+                <button className={styles.editBtn}>
+                &#x270E;Edit
+                </button>
+                </Link>
+                ) : (
+                ""
+                )}
+                </div>
+                ))}
+                </div>
 
                   {categories[categoryName].flatMap((item) => item).length >
                     4 && (
                     <button
-                      className="see-more"
+                      className={styles.seeMore}
                       onClick={() => handleSeeMore(categoryName)}
                     >
                       {showMore[categoryName] ? "See less" : "See more"}
                     </button>
                   )}
-                </>
+                </React.Fragment>
               ))
             ) : (
               <>
-                <h2 className="category-title">
+                <h2 className={styles.categoryTitle}>
                   Top stories about {selectedCategory}
                 </h2>
-                <div className="story-box">
+                <div className={styles.storyBox}>
                   {categories[selectedCategory]
-                    .flatMap((storiesArray, index) => storiesArray)
+                    .flatMap((storiesArray) => storiesArray)
                     .slice(0, showMore[selectedCategory] ? undefined : 4)
                     .map((story, storyIndex) => (
-                      <div key={storyIndex} className="story-card">
+                      <div key={storyIndex} className={styles.storyCard}>
                         <img
                           src={story.slideImageUrl}
                           alt="storypic"
-                          onClick={() => navigate(`/story/${story._id}`)}
+                          onClick={() =>
+                            handleSlide(story._id, selectedCategory)
+                          }
                         />
                         <div
-                          className="dark-shadow"
-                          onClick={() => navigate(`/story/${story._id}`)}
+                          className={styles.darkShadow}
+                          onClick={() =>
+                            handleSlide(story._id, selectedCategory)
+                          }
                         >
-                          <h3 className="story-title">{story.slideHeading}</h3>
-                          <h4 className="story-description">
+                          <div className={styles.storyTitle}>
+                            {story.slideHeading}
+                          </div>
+                          <div className={styles.storyDescription}>
                             {story.slideDescription
                               .split(" ")
                               .slice(0, 16)
                               .join(" ") + "..."}
-                          </h4>
+                          </div>
                         </div>
                         {slideByUser.includes(story._id) ? (
                           <Link to={`/editstory/${story._id}`}>
-                            <button className="edit-btn">&#x270E;Edit</button>
+                            <button className={styles.editBtn}>
+                              &#x270E;Edit
+                            </button>
                           </Link>
                         ) : (
                           ""
@@ -208,7 +233,7 @@ const Home = () => {
                   categories[selectedCategory].flatMap((item) => item).length >
                     4 && (
                     <button
-                      className="see-more"
+                      className={styles.seeMore}
                       onClick={() => handleSeeMore(selectedCategory)}
                     >
                       {showMore[selectedCategory] ? "See less" : "See more"}

@@ -9,7 +9,7 @@
     padding: 10px 10px;
     box-sizing: border-box;
   }
-  .page-title {
+  .pageTitle {
     cursor: pointer;
     color: #000;
     margin-left: 10px;
@@ -19,18 +19,17 @@
     font-weight: 700;
     line-height: normal;
   }
-  .navbar-btns {
+  .navbarBtns {
     display: flex;
     gap: 1.5rem;
     height: 5vh;
     margin-top: 3px;
     margin-right: 10px;
-
   }
-  .register-btn {
+  
+  .registerBtn {
     width: 100px;
     height: 30px;
-  
     border-radius: 15px;
     background: #fd7e7e;
     color: #fff;
@@ -44,13 +43,14 @@
     border: none;
     padding: 5px 10px;
   }
-  .register-btn:active {
+  
+  .registerBtn:active {
     background-color: #ee6565;
   }
-  .signin-btn {
+  
+  .signinBtn {
     width: 100px;
     height: 30px;
-  
     border-radius: 15px;
     background: #7bb0ff;
     color: #fff;
@@ -63,19 +63,18 @@
     cursor: pointer;
     border: none;
   }
-  .signin-btn:active {
+  
+  .signinBtn:active {
     background: #699dec;
   }
-  .bookmarks-btn {
+  
+  .bookmarksBtn {
     display: flex;
     align-items: center;
-  
     height: 35px;
-  
     border-radius: 15px;
     background: #fd7e7e;
     color: #fff;
-  
     font-family: DM Sans;
     font-size: 0.8rem;
     font-style: normal;
@@ -86,17 +85,20 @@
     padding: 8px 12px;
     text-transform: none;
   }
-  .profile-icon {
+  
+  .profileIcon {
     width: 40px;
     height: 40px;
     filter: brightness(120%);
     border-radius: 50%;
   }
-  .menu-icon {
+  
+  .menuIcon {
     margin-top: 5px;
     cursor: pointer;
   }
-  .profile-card {
+  
+  .profileCard {
     top: 11vh;
     right: 10px;
     position: absolute;
@@ -111,10 +113,12 @@
     background: #fff;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   }
-  .profile-card img {
+  
+  .profileCard img {
     margin-left: 140px;
     cursor: pointer;
   }
+  
   .username {
     color: #000;
     text-transform: capitalize;
@@ -125,10 +129,10 @@
     font-weight: 700;
     line-height: normal;
   }
-  .logout-btn {
+  
+  .logoutBtn {
     width: 100px;
     height: 35px;
-  
     border-radius: 15px;
     background: #fd7e7e;
     color: #fff;
@@ -142,63 +146,67 @@
     border: none;
     padding: 5px 10px;
   }
-  .logout-btn:active {
+  
+  .logoutBtn:active {
     background-color: #ee6565;
   }
+  
   @media screen and (min-width: 1400px) {
-    .navbar-container {
+    .navbarContainer {
       padding: 15px 10px;
     }
-    .page-title {
+  
+    .pageTitle {
       font-size: 36px;
     }
-    .navbar-btns {
+  
+    .navbarBtns {
       display: flex;
       gap: 1.5rem;
       height: 5vh;
       margin-top: 3px;
       margin-right: 20px;
-      /* border: 2px solid red; */
     }
-    .register-btn {
+  
+    .registerBtn,
+    .signinBtn {
       width: 120px;
       height: 35px;
       font-size: 1rem;
     }
   
-    .signin-btn {
-      width: 120px;
-      height: 35px;
+    .bookmarksBtn {
       font-size: 1rem;
     }
   
-    .bookmarks-btn {
-      font-size: 1rem;
-    }
-    .profile-icon {
+    .profileIcon {
       width: 45px;
       height: 45px;
       filter: brightness(120%);
       border-radius: 50%;
     }
-    .menu-icon {
+  
+    .menuIcon {
       margin-top: 5px;
       cursor: pointer;
     }
   
-    .profile-card img {
+    .profileCard img {
       margin-left: 140px;
       cursor: pointer;
     }
+  
     .username {
       font-size: 20px;
     }
-    .logout-btn {
+  
+    .logoutBtn {
       font-size: 1.2rem;
     }
   }
+  
   @media screen and (max-width: 750px) {
-    .navbar-container {
+    .navbarContainer {
       width: 100vw;
       height: 10vh;
       position: relative;
@@ -209,7 +217,8 @@
       padding: 10px 10px;
       box-sizing: border-box;
     }
-    .page-title {
+  
+    .pageTitle {
       cursor: pointer;
       color: #000;
       margin-left: 10px;
@@ -220,81 +229,58 @@
       font-weight: 700;
       line-height: normal;
     }
-    .navbar-btns {
+  
+    .navbarBtns {
       display: flex;
       gap: 1.5rem;
       height: 5vh;
       margin-top: 3px;
       margin-right: 10px;
-      /* border: 2px solid red; */
     }
-    .register-btn {
+  
+    .registerBtn,
+    .signinBtn {
       width: 150px;
       height: 40px;
-  
-      border-radius: 15px;
-      background: #fd7e7e;
-      color: #fff;
-      text-align: center;
-      font-family: DM Sans;
       font-size: 0.8rem;
-      font-style: normal;
-      font-weight: 600;
-      line-height: normal;
-      cursor: pointer;
-      border: none;
-      padding: 5px 10px;
+      border-radius: 15px;
     }
-    .register-btn:active {
+  
+    .registerBtn:active {
       background-color: #ee6565;
     }
-    .signin-btn {
-      width: 150px;
-      height: 40px;
   
-      border-radius: 15px;
-      background: #7bb0ff;
-      color: #fff;
-      text-align: center;
-      font-family: DM Sans;
-      font-size: 0.8rem;
-      font-style: normal;
-      font-weight: 600;
-      line-height: normal;
-      cursor: pointer;
-      border: none;
-    }
-    .signin-btn:active {
+    .signinBtn:active {
       background: #699dec;
     }
-    .bookmarks-btn {
+  
+    .bookmarksBtn {
       width: 150px;
       height: 40px;
       border-radius: 20px;
-      text-align: center;
-      font-family: DM Sans;
       font-size: 1rem;
-  
       border: none;
       padding: 0px 20px;
     }
-    .profile-icon {
+  
+    .profileIcon {
       width: 50px;
       height: 50px;
       filter: brightness(120%);
       border-radius: 50%;
     }
-    .menu-icon {
+  
+    .menuIcon {
       width: 30px;
       margin-top: 10px;
       margin-right: 20px;
       cursor: pointer;
     }
-    .profile-card {
+  
+    .profileCard {
       top: 10vh;
       right: 0px;
       position: absolute;
-  
       z-index: 1;
       float: none;
       padding-top: 10px;
@@ -303,28 +289,32 @@
       background: #fff;
       box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     }
-    .profile-contentbox {
+  
+    .profileContentbox {
       display: flex;
       flex-direction: column;
       gap: 1.6rem;
       align-items: center;
     }
-    .profile-card img {
+  
+    .profileCard img {
       margin-left: 0px;
       cursor: pointer;
     }
+  
     #crossBtn {
       margin-left: 80vw;
       float: right;
       cursor: pointer;
     }
+  
     .username {
       font-size: 20px;
     }
-    .logout-btn {
+  
+    .logoutBtn {
       width: 150px;
       height: 40px;
-  
       border-radius: 20px;
     }
   }

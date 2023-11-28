@@ -22,7 +22,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "https://swiptory-faqj.onrender.com/login",
+        `https://swiptory-faqj.onrender.com/login`,
         loginData,
         {
           headers: {
@@ -32,18 +32,17 @@ const Login = () => {
       );
 
       const responseData = response.data;
-      console.log(responseData);
+
       if (responseData.error) {
         setErrors(responseData.error);
       } else {
         window.localStorage.setItem("username", responseData.name);
         window.localStorage.setItem("token", responseData.jwtToken);
-        // alert(responseData.success);
 
         navigate("/");
       }
     } catch (error) {
-      alert("something went wrong, please try again");
+      toast("something went wrong, please try again");
     }
   };
   const cancelButton = () => {
@@ -51,17 +50,29 @@ const Login = () => {
   };
   return (
     <>
-      <div className="login-container">
-        <div className="login-box">
+      <div className={styles.loginContainer}>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+        <div className={styles.loginBox}>
           <img
             src={cancel}
             alt="cancel icon"
             onClick={cancelButton}
-            id="cancelBtn"
+            className={styles.cancelBtn}
           />
 
-          <div className="login-contentbox">
-            <h2 className="login-h2">Login to SwipTory</h2>
+          <div className={styles.loginContentBox}>
+            <h2 className={styles.loginH2}>Login to SwipTory</h2>
             <label>
               Username
               <input
@@ -86,20 +97,20 @@ const Login = () => {
                   src={eyeOffOutline}
                   alt="Hide Password"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="eye-icon"
+                  className={styles.eyeIcon}
                 />
               ) : (
                 <img
                   src={eyeOutline}
                   alt="Show Password"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="eye-icon"
+                  className={styles.eyeIcon}
                 />
               )}
             </label>
             <p style={{ color: "red" }}>{error && <span> {error}</span>}</p>
 
-            <button className="login-button" onClick={handleSubmit}>
+            <button className={styles.loginButton} onClick={handleSubmit}>
               Login
             </button>
           </div>
