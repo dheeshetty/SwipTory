@@ -25,7 +25,7 @@
     height: 5vh;
     margin-top: 3px;
     margin-right: 10px;
-    
+
   }
   .register-btn {
     width: 100px;
@@ -117,6 +117,7 @@
   }
   .username {
     color: #000;
+    text-transform: capitalize;
     text-align: center;
     font-family: DM Sans;
     font-size: 18px;

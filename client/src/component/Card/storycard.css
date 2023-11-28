@@ -9,6 +9,13 @@
     background: rgba(0, 0, 0, 0.88);
     display: flex;
   }
+  .loading {
+    width: 200px;
+    height: 200px;
+    margin-left: 550px;
+    text-align: center;
+    margin-top: 200px;
+  }
   .storycard-box {
     display: flex;
     margin: auto;
@@ -23,6 +30,7 @@
     position: relative;
     width: 22vw;
     height: 80vh;
+  
     border-radius: 10px;
     background: rgb(255, 255, 255) -67.777px 0px / 139.986% 100% no-repeat;
   }
@@ -47,9 +55,10 @@
     box-sizing: border-box;
   }
   .story-img {
+    top: 7vh;
     position: absolute;
     width: 22vw;
-    height: 80vh;
+    height: 60vh;
     border-radius: 10px;
   }
   .bookmarks-likes-container {
@@ -135,9 +144,15 @@
   
       margin: 15vw 20px;
     }
+    .loading {
+      width: 150px;
+      height: 150px;
+      margin-left: 700px;
+      text-align: center;
+      margin-top: 250px;
+    }
   }
   @media screen and (max-width: 750px) {
-  
     .story-container {
       position: absolute;
       width: 100vw;
@@ -155,8 +170,13 @@
       justify-content: space-between;
       gap: 1rem;
     }
-  
-    
+    .loading {
+      width: 150px;
+      height: 150px;
+      margin-left: 100px;
+      text-align: center;
+      margin-top: 200px;
+    }
     .storycard {
       position: relative;
       width: 100vw;
@@ -178,11 +198,11 @@
       position: absolute;
       width: 100vw;
       height: 26vh;
-      margin-top: 75vh;
+      margin-top: 74vh;
       border-bottom-left-radius: 0px;
       border-bottom-right-radius: 0px;
       background: linear-gradient(0deg, #000000 40.26%, rgba(0, 0, 0, 0) 100%);
-      padding-top: 5px;
+      padding-top: 0px;
       box-sizing: border-box;
     }
     .story-img {
@@ -191,18 +211,24 @@
       height: 100vh;
       border-radius: 10px;
     }
-    #previous-btn{
-  display: none;
+    #previous-btn {
+      position: absolute;
+      z-index: 4;
+      top: 40vh;
+      background-color: rgba(0, 0, 0, 0.7);
     }
-    #next-btn{
-      display: none;
-        }
+    #next-btn {
+      position: absolute;
+      z-index: 4;
+      top: 40vh;
+      right: 0;
+      background-color: rgba(0, 0, 0, 0.7);
+    }
     .bookmarks-likes-container {
       display: flex;
       justify-content: space-between;
       margin-left: 80px;
       width: 70vw;
-      
     }
     .bookmarks-likes-container div {
       display: flex;
@@ -238,7 +264,7 @@
       padding: 5px;
       font-family: DM Sans;
       font-size: 20px;
-    
+  
       margin: 75vw 50px;
     }
     .story-title {
@@ -246,15 +272,15 @@
       margin-bottom: 5px;
     }
     .story-description {
-     margin: 3px 16px 20px 10px;
+      margin: 3px 16px 20px 10px;
       text-align: justify;
       height: 10vh;
     }
-    
+  
     .enabled-btn {
       cursor: pointer;
     }
-    
+  
     .disabled-btn {
       cursor: default;
       opacity: 0.6;

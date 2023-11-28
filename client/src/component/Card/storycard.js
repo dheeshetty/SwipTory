@@ -27,7 +27,7 @@ const StoryCard = () => {
 
   useEffect(() => {
     axios
-      .get(`https://swiptory-faqj.onrender.com/${id}`)
+      .get(`https://swiptory-backend.onrender.com/${id}`)
       .then((response) => {
         setStory(response.data.story.slides);
       })
@@ -53,7 +53,7 @@ const StoryCard = () => {
           clearInterval(progressInterval.current);
           setTimeout(() => {
             setProgress(0);
-          }, 10000);
+          }, 2000);
         }
         return newProgress;
       });
@@ -62,7 +62,7 @@ const StoryCard = () => {
     if (enableAutoSlideChange && currentSlideIndex < (story?.length || 1) - 1) {
       progressInterval.current = setInterval(
         updateProgress,
-        10000 / (story?.length || 1)
+        2000 / (story?.length || 1)
       );
     } else {
       clearInterval(progressInterval.current);
@@ -83,7 +83,7 @@ const StoryCard = () => {
 
     setTimeout(() => {
       setEnableAutoSlideChange(true);
-    }, 10000);
+    }, 2000);
   };
 
   const handlePreviousSlide = () => {
@@ -95,7 +95,7 @@ const StoryCard = () => {
 
     setTimeout(() => {
       setEnableAutoSlideChange(true);
-    }, 10000);
+    }, 2000);
   };
 
   const handleShare = () => {
@@ -176,7 +176,7 @@ const StoryCard = () => {
   };
 
   if (!story || story.length === 0) {
-    return <div>Loading...</div>;
+    return <img src="https://i.gifer.com/80ZN.gif" className="loading"></img>;
   }
 
   const currentSlide = story[currentSlideIndex];
@@ -202,7 +202,7 @@ const StoryCard = () => {
           <img
             src={previousStoryBtn}
             alt="backbutton"
-            onClick={handlePreviousSlide} 
+            onClick={handlePreviousSlide}
             id="previous-btn"
             className={currentSlideIndex === 0 ? "disabled-btn" : "enabled-btn"}
           />

@@ -14,16 +14,17 @@ const EditStory = () => {
     slideImageUrl: "",
     category: "",
   };
-
+  const [isLoading, setIsLoading] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [story, setStory] = useState([initialSlide]);
   useEffect(() => {
+    setIsLoading(true);
     const fetchUserStories = async () => {
       try {
         const jwtToken = localStorage.getItem("token");
 
         const response = await axios.get(
-          "https://swiptory-faqj.onrender.com/storiesbyuser",
+          `https://swiptory-backend.onrender.com/api/story/edit/${id}`,
           {
             headers: {
               Authorization: jwtToken,
@@ -31,11 +32,10 @@ const EditStory = () => {
           }
         );
 
-        const userStories = response.data.userStories;
-        const foundStory = userStories.find((story) => story._id === id);
-
+        const foundStory = response.data.story.slides;
+        setIsLoading(false);
         if (foundStory) {
-          setStory(foundStory.slides);
+          setStory(foundStory);
         } else {
           setErrors("Story not found");
         }
@@ -76,7 +76,7 @@ const EditStory = () => {
       const jwtToken = localStorage.getItem("token");
 
       const response = await axios.put(
-        `https://swiptory-faqj.onrender.com/story/edit/${id}`,
+        `https://swiptory-backend.onrender.com/api/story/edit/${id}`,
         { slides },
         {
           headers: {
@@ -118,6 +118,8 @@ const EditStory = () => {
             ))}
           </div>
           <div className="editstory-contentbox">
+            {!isLoading ? (
+              <>
             <div>
               <label>Heading:</label>
               <input
@@ -162,15 +164,21 @@ const EditStory = () => {
                 <option value="" defaultChecked>
                   Select Category
                 </option>
-                <option value="food">Food</option>
-                <option value="health and fitness">Health and Fitness</option>
+                  <option value="food">Food</option>
+                  <option value="health and fitness">
+                  Health and Fitness
+                </option>
                 <option value="travel">Travel</option>
                 <option value="movies">Movies</option>
                 <option value="education">Education</option>
               </select>
-            </div>
+                </div>{" "}
+              </>
+            ) : (
+              <h2>Loading...</h2>
+            )}
           </div>
-          <p style={{ color: "red", marginLeft: "8rem",marginTop:'0' }}>
+          <p style={{ color: "red", marginLeft: "8rem", marginTop: "0" }}>
             {error && <span> {error}</span>}
           </p>
           <div className="editstory-buttons-box">
