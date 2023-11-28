@@ -12,7 +12,8 @@ const Header = () => {
 
   const isLoggedIn = !!localStorage.getItem("token");
   const username = localStorage.getItem("username");
-
+  const viewport = window.innerWidth;
+  console.log(viewport);
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("username");
@@ -28,10 +29,11 @@ const Header = () => {
 
   return (
     <>
-      <div className="navbar-container">
-        <div className="page-title" onClick={() => navigate("/")}>
-          SwipTory
-        </div>
+    <div className="navbar-container">
+      <div className="page-title" onClick={() => navigate("/")}>
+        SwipTory
+      </div>
+      {viewport > 600 ? (
         <div className="navbar-btns">
           {!isLoggedIn ? (
             <>
@@ -41,13 +43,16 @@ const Header = () => {
               >
                 Register Now
               </button>
-              <button className="signin-btn" onClick={() => navigate("/login")}>
+              <button
+                className="signin-btn"
+                onClick={() => navigate("/login")}
+              >
                 Sign in
               </button>
             </>
           ) : (
             <>
-              <Link to="/bookmarked">
+              <Link to="/bookmarked" style={{ textDecoration: "none" }}>
                 <button className="bookmarks-btn">
                   <img src={bookmarkIcon} alt="" /> &nbsp; Bookmarks
                 </button>
@@ -85,9 +90,79 @@ const Header = () => {
             </>
           )}
         </div>
-      </div>
-    </>
-  );
+      ) : (
+        <div className="mobileview">
+          <img
+            src={menuIcon}
+            alt="menu-icon"
+            className="menu-icon"
+            onClick={toggleProfileCard}
+          />
+          {isProfileCardOpen && (
+            <div className="profile-card">
+              <img
+                src={cross}
+                alt="cancel btn"
+                onClick={toggleProfileCard}
+                id="crossBtn"
+              />
+              <div className="profile-contentbox">
+                {!isLoggedIn ? (
+                  <>
+                    <button
+                      className="register-btn"
+                      onClick={() => navigate("/register")}
+                    >
+                      Register Now
+                    </button>
+                    <button
+                      className="signin-btn"
+                      onClick={() => navigate("/login")}
+                    >
+                      Sign in
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <div
+                      style={{
+                        display: "flex",
+                        gap: "40px",
+                        marginRight: "100px",
+                      }}
+                    >
+                      <img
+                        src={profileIcon}
+                        alt="profile-icon"
+                        className="profile-icon"
+                      />
+                      <h1 className="username">{username}</h1>
+                    </div>
+                    <Link to="/bookmarked" style={{ textDecoration: "none" }}>
+                      <button className="bookmarks-btn">
+                        <img src={bookmarkIcon} alt="" /> &nbsp; Bookmarks
+                      </button>
+                    </Link>
+                    <button
+                      className="bookmarks-btn"
+                      onClick={() => navigate("/addstory")}
+                      style={{ paddingLeft: "40px" }}
+                    >
+                      Add Story
+                    </button>
+                    <button className="logout-btn" onClick={handleLogout}>
+                      Logout
+                    </button>
+                  </>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  </>
+);
 };
 
 export default Header;

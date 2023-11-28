@@ -53,7 +53,12 @@ const Login = () => {
     <>
       <div className="login-container">
         <div className="login-box">
-          <img src={cancel} alt="cancel icon" onClick={cancelButton} />
+          <img
+            src={cancel}
+            alt="cancel icon"
+            onClick={cancelButton}
+            id="cancelBtn"
+          />
 
           <div className="login-contentbox">
             <h2 className="login-h2">Login to SwipTory</h2>

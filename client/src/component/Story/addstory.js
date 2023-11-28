@@ -80,7 +80,7 @@ const AddStory = () => {
       <div className="addstory-container">
         <div className="addstory-box">
           <img src={cancel} alt="cancel-icon" onClick={cancelButton} />
-          <div className="heading2">Add up to 6 slides</div>
+          <div id="heading2">Add up to 6 slides</div>
           <div className="slide-btn-container">
             {story.map((_, index) => (
               <div
@@ -151,7 +151,7 @@ const AddStory = () => {
               </select>
             </div>
           </div>
-          <p style={{ color: "red", marginLeft: "5rem" }}>
+          <p style={{ color: "red", marginLeft: "8rem",marginTop:'0' }}>
             {error && <span> {error}</span>}
           </p>
           <div className="addstory-buttons-box">

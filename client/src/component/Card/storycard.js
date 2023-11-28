@@ -27,7 +27,7 @@ const StoryCard = () => {
 
   useEffect(() => {
     axios
-      .get(`https://swiptory-faqj.onrender.com/story/${id}`)
+      .get(`https://swiptory-faqj.onrender.com/${id}`)
       .then((response) => {
         setStory(response.data.story.slides);
       })
@@ -127,7 +127,7 @@ const StoryCard = () => {
       const currentSlideId = story[currentSlideIndex]._id;
       const jwtToken = localStorage.getItem("token");
       const response = await axios.post(
-        `https://swiptory-faqj.onrender.com/stories/${currentSlideId}/bookmark`,
+        `https://swiptory-faqj.onrender.com/${currentSlideId}/bookmark`,
         null,
         {
           headers: {
@@ -154,7 +154,7 @@ const StoryCard = () => {
       const currentSlideId = story[currentSlideIndex]._id;
       const jwtToken = localStorage.getItem("token");
       const response = await axios.post(
-        `https://swiptory-faqj.onrender.com/stories/${currentSlideId}/like`,
+        `https://swiptory-faqj.onrender.com/${currentSlideId}`,
         null,
         {
           headers: {
@@ -163,7 +163,7 @@ const StoryCard = () => {
         }
       );
       const likes = await axios.get(
-        `https://swiptory-faqj.onrender.com/stories/${currentSlideId}/likes`
+        `https://swiptory-faqj.onrender.com/${currentSlideId}/isliked`
       );
 
       if (response.status === 200) {
@@ -202,7 +202,8 @@ const StoryCard = () => {
           <img
             src={previousStoryBtn}
             alt="backbutton"
-            onClick={handlePreviousSlide}
+            onClick={handlePreviousSlide} 
+            id="previous-btn"
             className={currentSlideIndex === 0 ? "disabled-btn" : "enabled-btn"}
           />
           <div className="storycard">
@@ -263,6 +264,7 @@ const StoryCard = () => {
             src={nextStoryBtn}
             alt="nextbutton"
             onClick={handleNextSlide}
+            id="next-btn"
             className={
               currentSlideIndex === story.length - 1
                 ? "disabled-btn"

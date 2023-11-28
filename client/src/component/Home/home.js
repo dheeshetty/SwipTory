@@ -120,7 +120,10 @@ const Home = () => {
                             {storiesArray[0].slideHeading}
                           </h3>
                           <h4 className="story-description">
-                            {storiesArray[0].slideDescription}
+                            {storiesArray[0].slideDescription
+                              .split(" ")
+                              .slice(0, 16)
+                              .join(" ") + "..."}
                           </h4>
                         </div>
                       </div>
@@ -161,7 +164,10 @@ const Home = () => {
                           {storiesArray[0].slideHeading}
                         </h3>
                         <h4 className="story-description">
-                          {storiesArray[0].slideDescription}
+                          {storiesArray[0].slideDescription
+                            .split(" ")
+                            .slice(0, 16)
+                            .join(" ") + "..."}
                         </h4>
                       </div>
                     </div>

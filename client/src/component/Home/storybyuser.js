@@ -12,7 +12,7 @@ const Storybyuser = () => {
       try {
         const jwtToken = localStorage.getItem("token");
         const response = await axios.get(
-          "https://swiptory-faqj.onrender.com//storiesbyuser",
+          "https://swiptory-faqj.onrender.com/storiesbyuser",
           {
             headers: {
               Authorization: jwtToken,
@@ -42,16 +42,19 @@ const Storybyuser = () => {
         <h2 className="category-title">Your Stories</h2>
         <div className="story-box">
           {stories.slice(0, visibleStories).map((story, i) => (
-            <div
-              key={i}
-              className="story-card"
-              onClick={() => navigate(`/story/${story._id}`)}
-            >
-              <img src={story.slides[0].slideImageUrl} alt="foodpic" />
+            <div key={i} className="story-card">
+              <img
+                src={story.slides[0].slideImageUrl}
+                alt="foodpic"
+                onClick={() => navigate(`/story/${story._id}`)}
+              />
               <div className="dark-shadow">
                 <h3 className="story-title">{story.slides[0].slideHeading}</h3>
                 <h4 className="story-description">
-                  {story.slides[0].slideDescription}
+                  {story.slides[0].slideDescription
+                    .split(" ")
+                    .slice(0, 16)
+                    .join(" ") + "..."}
                 </h4>
               </div>
               <Link to={`/editstory/${story._id}`}>

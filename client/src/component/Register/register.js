@@ -55,7 +55,7 @@ const Register = () => {
     <>
       <div className="register-container">
         <div className="register-box">
-          <img src={cancel} alt="cancel icon" onClick={cancelButton} />
+          <img src={cancel} alt="cancel icon" onClick={cancelButton} id="cancelBtn"/>
 
           <div className="register-contentbox">
             <h2 className="login-h2">Register to SwipTory</h2>

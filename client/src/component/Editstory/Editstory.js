@@ -104,7 +104,7 @@ const EditStory = () => {
       <div className="editstory-container">
         <div className="editstory-box">
           <img src={cancel} alt="cancel-icon" onClick={cancelButton} />
-          <div className="heading2">Edit Story</div>
+          <div id="heading2">Edit Story</div>
           <div className="slide-btn-container">
             {story.map((_, index) => (
               <div
@@ -170,7 +170,7 @@ const EditStory = () => {
               </select>
             </div>
           </div>
-          <p style={{ color: "red", marginLeft: "5rem" }}>
+          <p style={{ color: "red", marginLeft: "8rem",marginTop:'0' }}>
             {error && <span> {error}</span>}
           </p>
           <div className="editstory-buttons-box">
