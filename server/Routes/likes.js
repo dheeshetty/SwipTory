@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Story = require("../Models/Stories");
+const Story = require("../Models/Story.js");
 const Like = require("../Models/Likes");
 const authMiddleware = require("../Middleware/authMiddleware");
 

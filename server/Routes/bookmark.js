@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const Story = require("../Models/Stories");
+const Story = require("../Models/Story.js");
 const mongoose = require("mongoose");
-const Bookmark = require("../Models/Bookmark");
+const Bookmark = require("../Models/Bookmark.js");
 const authMiddleware = require("../Middleware/authMiddleware");
 
 // api to save bookmark
@@ -32,10 +32,9 @@ router.post("/:storyId", authMiddleware, async (req, res) => {
   }
 });
 
-//Bookmark stories by user
+// api to get all the bookmark stories by user
 router.get("/bookmarkedslides", authMiddleware, async (req, res) => {
   try {
-    console.log("Entering/bookmarkedslides route");
     const loggedInUserId = req.user.username;
     const bookmarkedSlides = await Bookmark.find({
       bookmarkedbyuser: loggedInUserId,
@@ -54,15 +53,13 @@ router.get("/bookmarkedslides", authMiddleware, async (req, res) => {
         slidesToReturn.push(matchingSlide.slides[0]);
       }
     }
-    
+
     res.json(
       slidesToReturn.length > 0
         ? slidesToReturn
         : { error: "No bookmarked slides found" }
-        
     );
   } catch (error) {
-    console.error("Error in /bookmarkedslides route:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
