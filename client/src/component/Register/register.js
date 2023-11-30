@@ -27,7 +27,7 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-        `${backend_url}api/auth/register`,
+        `${backend_url}/api/auth/register`,
         userData,
         {
           headers: {
