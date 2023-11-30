@@ -1,3 +1,4 @@
+
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -20,10 +21,11 @@ app.get("/", (req, resp) => {
   resp.status(200).json("Server is running");
 });
 
-app.use(auth);
-app.use(story);
-app.use(bookmark);
-app.use(like);
+app.use("/api/auth", auth);
+app.use("/api/story", story);
+app.use("/api/story/bookmark", bookmark);
+app.use("/api/story/like", like);
+
 
 // connect to server
 app.listen(process.env.PORT, () => {

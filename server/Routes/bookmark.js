@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const Story = require("../Models/Story.js");
+const Story = require("../Models/Story");
 const mongoose = require("mongoose");
-const Bookmark = require("../Models/Bookmark.js");
-const authMiddleware = require("../Middleware/authMiddleware");
+const Bookmark = require("../Models/Bookmark");
+const authMiddleware = require("../Middleware/authMiddleware")
 
 // api to save bookmark
 router.post("/:storyId", authMiddleware, async (req, res) => {
@@ -28,7 +28,7 @@ router.post("/:storyId", authMiddleware, async (req, res) => {
       return res.json({ message: "Story bookmarked successfully" });
     }
   } catch (error) {
-    res.status(500).json({ error: "Story Bookmarked Failed" });
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 
@@ -40,7 +40,11 @@ router.get("/bookmarkedslides", authMiddleware, async (req, res) => {
       bookmarkedbyuser: loggedInUserId,
     });
 
+    console.log("Bookmarked Slides:", bookmarkedSlides);
+
     const slideIds = bookmarkedSlides.map((bookmark) => bookmark.story);
+
+    console.log("Slide IDs:", slideIds);
 
     const slidesToReturn = [];
 
@@ -49,10 +53,15 @@ router.get("/bookmarkedslides", authMiddleware, async (req, res) => {
         { "slides._id": slideId },
         { slides: { $elemMatch: { _id: slideId } } }
       );
+
+      console.log("Matching Slide:", matchingSlide);
+
       if (matchingSlide && matchingSlide.slides.length > 0) {
         slidesToReturn.push(matchingSlide.slides[0]);
       }
     }
+
+    console.log("Slides to Return:", slidesToReturn);
 
     res.json(
       slidesToReturn.length > 0
@@ -60,12 +69,13 @@ router.get("/bookmarkedslides", authMiddleware, async (req, res) => {
         : { error: "No bookmarked slides found" }
     );
   } catch (error) {
+    console.error("Error:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
 
-//Search a story by its ID
-router.get("/:id/bookmark", authMiddleware, async (req, res) => {
+// API to search a story by its ID
+router.get("/:id/isbookmarked", authMiddleware, async (req, res) => {
   try {
     const storyId = req.params.id;
     const loggedInUserId = req.user.username;

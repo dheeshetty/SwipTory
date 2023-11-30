@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-const authMiddleware = (req, res, next) => {
+const IsAuthenticated = (req, res, next) => {
   try {
     const user = jwt.verify(req.headers.authorization, process.env.SECRET_KEY);
     req.user = user;
@@ -9,4 +9,4 @@ const authMiddleware = (req, res, next) => {
   }
   next();
 };
-module.exports = authMiddleware;
+module.exports = IsAuthenticated;

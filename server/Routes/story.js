@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const Story = require("../Models/Story.js");
-const authMiddleware = require("../Middleware/authMiddleware.js");
+const Story = require("../Models/Story");
+const authMiddleware = require("../Middleware/authMiddleware");
 
-//addstory
+//addstory 
 router.post("/addstory", authMiddleware, async (req, resp) => {
   try {
     const { slides } = req.body;
@@ -22,7 +22,7 @@ router.post("/addstory", authMiddleware, async (req, resp) => {
     if (slides.length < 3 || slides.length > 6) {
       return resp.json({
         error:
-          "story must have a minimum of 3 slides and a maximum of 6 slides",
+          "A story must have a minimum of 3 slides and a maximum of 6 slides",
       });
     }
 
@@ -41,7 +41,7 @@ router.post("/addstory", authMiddleware, async (req, resp) => {
       story: addStory,
     });
   } catch (error) {
-    return resp.status(500).json({ error: "Story upload failed" });
+    return resp.status(500).json({ error: "Internal server error" });
   }
 });
 // API to edit story and slides
@@ -57,7 +57,7 @@ router.put("/edit/:id", authMiddleware, async (req, res) => {
     }
     if (story.addedbyuser !== req.user.username) {
       return res.status(403).json({
-        error: "Only the admin can edit",
+        error: "Only the owner can edit the story",
       });
     }
 
@@ -77,10 +77,10 @@ router.put("/edit/:id", authMiddleware, async (req, res) => {
       story: updatedStory,
     });
   } catch (error) {
-    return res.status(500).json({ error: "Story update failed" });
+    return res.status(500).json({ error: "Internal server error" });
   }
 });
-// API to get story for edit
+//get story for edit
 router.get("/edit/:id", authMiddleware, async (req, res) => {
   try {
     const slideId = req.params.id;
@@ -98,7 +98,7 @@ router.get("/edit/:id", authMiddleware, async (req, res) => {
     return res.status(500).json({ error: "Internal server error" });
   }
 });
-// API to get stories by category
+// get stories by category
 router.get("/stories/:category", async (req, res) => {
   try {
     const category = req.params.category;
@@ -110,7 +110,7 @@ router.get("/stories/:category", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
-// API to get all categories and their respective stories
+// get all categories and their respective stories
 router.get("/categories", async (req, res) => {
   try {
     const categories = [

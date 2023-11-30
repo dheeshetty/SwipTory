@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const Story = require("../Models/Story.js");
+const Story = require("../Models/Story");
 const Like = require("../Models/Likes");
 const authMiddleware = require("../Middleware/authMiddleware");
 
-// like a story
+// api to  like a story
 router.post("/:storyId", authMiddleware, async (req, res) => {
   try {
     const loggedInUserId = req.user.username;
