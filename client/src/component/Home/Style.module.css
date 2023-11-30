@@ -232,9 +232,9 @@
     height: 8vh;
     border-radius: 20px;
     cursor: pointer;
-    background: linear-gradient(45deg, #e66485, #3ebdfc);
     background-size: cover;
     background-position: center;
+    background: url('https://www.healthifyme.com/blog/wp-content/uploads/2016/11/Travel-Hacks.jpg') no-repeat;
     padding: 10px;
   }
   .loadingbar {

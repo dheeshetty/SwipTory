@@ -24,7 +24,7 @@ const Home = () => {
     setIsLoading(true);
     async function fetchCategories() {
       try {
-        const response = await axios.get("https://swiptory-faqj.onrender.com/api/story/categories");
+        const response = await axios.get(`${backend_url}/api/story/categories`);
 
         setCategories(response.data.categories);
         setIsLoading(false);
