@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 import category from "./data";
-import "./home.css";
+import styles from "./Style.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import loadingbar from "../../assets/loading.gif"
 import { Link } from "react-router-dom";
@@ -23,7 +23,7 @@ const Home = () => {
     setIsLoading(true);
     async function fetchCategories() {
       try {
-        const response = await axios.get("https://swiptory-faqj.onrender.com/categories");
+        const response = await axios.get("https://swiptory-faqj.onrender.com/api/story/categories");
 
         setCategories(response.data.categories);
         setIsLoading(false);
@@ -35,19 +35,28 @@ const Home = () => {
     fetchCategories();
     async function fetchStoriesByUser() {
       const jwtToken = localStorage.getItem("token");
-      const response = await axios.get(
-        "https://swiptory-faqj.onrender.com/storiesbyuser",
-        {
+      try {
+        const response = await axios.get("https://swiptory-faqj.onrender.com/api/story/storiesbyuser", {
           headers: {
             Authorization: jwtToken,
           },
+        });
+    
+        // Check if userStories exists in the response and is an array
+        if (response.data && Array.isArray(response.data.userStories)) {
+          const slideIdArray = response.data.userStories
+            .flatMap((story) => (story.slides || []).map((item) => item._id));
+          setSlideByUser(slideIdArray);
+        } else {
+          console.error("Invalid userStories data in response:", response.data);
+          // Handle the case where userStories is not as expected
         }
-      );
-      const slideIdArray = await response.data.userStories
-        .flatMap((story) => story.slides)
-        .map((item) => item._id);
-      setSlideByUser(slideIdArray);
+      } catch (error) {
+        console.error("Error in fetching stories by user:", error);
+        toast("Error in fetching stories by user", error);
+      }
     }
+    
     const isUserLoggedIn = !!localStorage.getItem("token");
     if (isUserLoggedIn) {
       fetchStoriesByUser();
@@ -107,9 +116,9 @@ const Home = () => {
               key={index}
               className={styles.categoryBox}
               style={{
-              backgroundImage: `url(${data.image})`,
-              border:
-              selectedCategory === data.category ? "5px solid #00ACD2" : "",
+                backgroundImage: `url(${data.image})`,
+                border:
+                  selectedCategory === data.category ? "5px solid #00ACD2" : "",
               }}
               onClick={() => handleCategoryClick(data.category)}
             >
@@ -129,48 +138,48 @@ const Home = () => {
 
             {selectedCategory === "All" ? (
               Object.keys(categories).map((categoryName, index) => (
-              <React.Fragment key={index}>
+                <React.Fragment key={index}>
                   <h2 className={styles.categoryTitle}>
                     Top stories about {categoryName}
                   </h2>
-            <div className={styles.storyBox}>
-              {categories[categoryName]
-              .flatMap((storiesArray) => storiesArray)
-              .slice(0, showMore[categoryName] ? undefined : 4)
-              .map((story, storyIndex) => (
-              <div key={storyIndex} className={styles.storyCard}>
-              <img
-                src={story.slideImageUrl}
-                alt="storypic"
-                onClick={() => handleSlide(story._id, categoryName)}
-              />
-            <div
-                className={styles.darkShadow}
-                onClick={() => handleSlide(story._id, categoryName)}
-                >
-                <div className={styles.storyTitle}>
-                {story.slideHeading}
-                </div>
-                <div className={styles.storyDescription}>
-                {story.slideDescription
-                .split(" ")
-                .slice(0, 16)
-                .join(" ") + "..."}
-              </div>
-              </div>
+                  <div className={styles.storyBox}>
+                    {categories[categoryName]
+                      .flatMap((storiesArray) => storiesArray)
+                      .slice(0, showMore[categoryName] ? undefined : 4)
+                      .map((story, storyIndex) => (
+                        <div key={storyIndex} className={styles.storyCard}>
+                          <img
+                            src={story.slideImageUrl}
+                            alt="storypic"
+                            onClick={() => handleSlide(story._id, categoryName)}
+                          />
+                          <div
+                            className={styles.darkShadow}
+                            onClick={() => handleSlide(story._id, categoryName)}
+                          >
+                            <div className={styles.storyTitle}>
+                              {story.slideHeading}
+                            </div>
+                            <div className={styles.storyDescription}>
+                              {story.slideDescription
+                                .split(" ")
+                                .slice(0, 16)
+                                .join(" ") + "..."}
+                            </div>
+                          </div>
 
-                {slideByUser.includes(story._id) ? (
-                <Link to={`/editstory/${story._id}`}>
-                <button className={styles.editBtn}>
-                &#x270E;Edit
-                </button>
-                </Link>
-                ) : (
-                ""
-                )}
-                </div>
-                ))}
-                </div>
+                          {slideByUser.includes(story._id) ? (
+                            <Link to={`/editstory/${story._id}`}>
+                              <button className={styles.editBtn}>
+                                &#x270E;Edit
+                              </button>
+                            </Link>
+                          ) : (
+                            ""
+                          )}
+                        </div>
+                      ))}
+                  </div>
 
                   {categories[categoryName].flatMap((item) => item).length >
                     4 && (

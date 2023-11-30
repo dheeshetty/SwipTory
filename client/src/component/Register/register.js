@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./register.css";
+import styles from "./register.module.css";
 import cancel from "../../assets/cancel.svg";
 import eyeOutline from "../../assets/eye.png";
 import eyeOffOutline from "../../assets/hide.png";
@@ -26,7 +26,7 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-        "https://swiptory-faqj.onrender.com/register",
+        "https://swiptory-faqj.onrender.com/api/auth/register",
         userData,
         {
           headers: {

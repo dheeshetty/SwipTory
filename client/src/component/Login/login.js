@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./login.css";
+import styles from "./login.module.css";
 import cancel from "../../assets/cancel.svg";
 import eyeOutline from "../../assets/eye.png";
 import eyeOffOutline from "../../assets/hide.png";
@@ -22,7 +22,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        `https://swiptory-faqj.onrender.com/login`,
+        `https://swiptory-faqj.onrender.com//api/auth/login`,
         loginData,
         {
           headers: {

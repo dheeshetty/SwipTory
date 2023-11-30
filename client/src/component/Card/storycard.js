@@ -1,16 +1,18 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect} from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProgressBar from "./progress";
-import "./storycard.css";
+import styles from "./Style.module.css";
 import previousStoryBtn from "../../assets/prev_ltr.svg";
 import nextStoryBtn from "../../assets/next-ltr.svg";
 import bookmarkedIcon from "../../assets/bkicon.svg";
 import likedIcon from "../../assets/likes.svg";
 import shareIcon from "../../assets/shareicon.svg";
 import cancelIcon from "../../assets/storycross.svg";
+import nonLikedIcon from "../../assets/nonLiked.svg";
+import nonBookmarkIcon from "../../assets/nonBookmarked.svg"
 
 
 const StoryCard = () => {
@@ -48,30 +50,6 @@ const StoryCard = () => {
 
     checkLoginStatus();
   }, []);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress((prevProgress) =>
-        prevProgress + 33.33 > 100 ? 0 : prevProgress + 33.33
-      );
-    }, 1000); // 1 second interval
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
-  useEffect(() => {
-    let interval;
-
-    if (enableAutoSlideChange) {
-      interval = setInterval(() => {
-        handleNextSlide();
-      }, 3000);
-    }
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [currentSlideIndex, enableAutoSlideChange]);
 
   const handleSlideChange = (newIndex) => {
     setCurrentSlideIndex(newIndex);
@@ -93,11 +71,40 @@ const StoryCard = () => {
       handleSlideChange(newIndex);
     }
   };
+  useEffect(() => {
+    let currentProgress = 0;
+    let increment = 100 / (10 * 30);
 
+    const interval = setInterval(() => {
+      currentProgress += increment;
+      if (currentProgress > 100) {
+        clearInterval(interval);
+      } else {
+        setProgress(currentProgress);
+      }
+    }, 33);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [currentSlideIndex, enableAutoSlideChange]);
+  useEffect(() => {
+    let timeInterval;
+
+    if (enableAutoSlideChange) {
+      timeInterval = setInterval(() => {
+        handleNextSlide();
+      }, 10000);
+    }
+   
+    return () => {
+      clearInterval(timeInterval);
+    };
+  }, [currentSlideIndex, enableAutoSlideChange]);
   const handleShare = () => {
     const currentSlideId = story[currentSlideIndex]._id;
     const baseLink = process.env.REACT_APP_BASE_URL;
-    const linkToCopy = `${baseLink}/story/${currentSlideId}`;
+    const linkToCopy = `http://localhost:3000/story/${currentSlideId}`;
 
     navigator.clipboard.writeText(linkToCopy).then(() => {
       setShowLinkShareBar(true);
@@ -124,7 +131,7 @@ const StoryCard = () => {
 
       const jwtToken = localStorage.getItem("token");
       const response = await axios.post(
-        `https://swiptory-faqj.onrender.com/bookmark/${currentSlideId}`,
+        `https://swiptory-faqj.onrender.com/api/story/bookmark/${currentSlideId}`,
         null,
         {
           headers: {
@@ -155,7 +162,7 @@ const StoryCard = () => {
       const currentSlideId = story[currentSlideIndex]._id;
       const jwtToken = localStorage.getItem("token");
       const response = await axios.post(
-        `https://swiptory-faqj.onrender.com/like/${currentSlideId}`,
+        `https://swiptory-faqj.onrender.com/api/story/like//${currentSlideId}`,
         null,
         {
           headers: {
@@ -180,7 +187,7 @@ const StoryCard = () => {
     const getUserBookmark = async () => {
       const jwtToken = localStorage.getItem("token");
       const response = await axios.get(
-        `<https://swiptory-faqj.onrender.com>/bookmark/${id}/bookmark`,
+        `https://swiptory-faqj.onrender.com/api/story/bookmark/${id}/isBookmarked`,
 
         {
           headers: {
@@ -195,7 +202,7 @@ const StoryCard = () => {
     const getUserLike = async () => {
       const jwtToken = localStorage.getItem("token");
       const response = await axios.get(
-        `${apiBaseUrl}/api/story/like/${id}/isLiked`,
+        `https://swiptory-faqj.onrender.com/api/story/like/${id}/isLiked`,
 
         {
           headers: {
@@ -209,7 +216,7 @@ const StoryCard = () => {
     getUserLike();
     const getSlideLikes = async () => {
       const likesResponse = await axios.get(
-        `https://swiptory-faqj.onrender.com/like/${id}`
+        `https://swiptory-faqj.onrender.com/api/story/like/${id}`
       );
       setLikesCount(likesResponse.data.likes);
     };

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import "./editstory.css";
+import styles from "./editstory.module.css";
 import cancel from "../../assets/cancel.svg";
 import { useNavigate, useParams } from "react-router";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const EditStory = () => {
   const navigate = useNavigate();
@@ -23,7 +25,7 @@ const EditStory = () => {
     const fetchUserStories = async () => {
       try {
         const jwtToken = localStorage.getItem("token");
-        const response = await axios.get(`https://swiptory-backend.onrender.com/edit/${id}`, {
+        const response = await axios.get(`https://swiptory-backend.onrender.com/api/story/edit/${id}`, {
           headers: {
             Authorization: jwtToken,
           },
@@ -73,7 +75,7 @@ const EditStory = () => {
       const slides = story;
       const jwtToken = localStorage.getItem("token");
       const response = await axios.put(
-        `https://swiptory-backend.onrender.com/edit/${id}`,
+        `https://swiptory-faqj.onrender.com/api/story/edit/${id}`,
         { slides },
         {
           headers: {

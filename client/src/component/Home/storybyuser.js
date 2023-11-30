@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./home.css";
+import styles from "./Style.module.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -17,7 +17,7 @@ const Storybyuser = () => {
       try {
         const jwtToken = localStorage.getItem("token");
         const response = await axios.get(
-          "https://swiptory-faqj.onrender.com/storiesbyuser",
+          "https://swiptory-faqj.onrender.com/api/story/storiesbyuser",
           {
             headers: {
               Authorization: jwtToken,

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import styles from "../Home/home.css";
+import styles from "../Home/Style.module.css";
 import Navbar from "../Navbar/header";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -20,7 +20,7 @@ const Bookmark = () => {
       try {
         const jwtToken = localStorage.getItem("token");
         const response = await axios.get(
-          `https://swiptory-backend.onrender.com/bookmarkedslides`,
+          `https://swiptory-faqj.onrender.com/api/story/bookmark/bookmarkedslides`,
           {
             headers: {
               Authorization: jwtToken,
@@ -45,17 +45,17 @@ const Bookmark = () => {
   const handleSeeLess = () => {
     setVisibleStories(4);
   };
-    const [storyCardData, setStoryCardData] = useState();
-    const handleSlide = async (storySlideId) => {
-      const slidesByCategory = bookmarkedStories;
-      setStoryCardData(slidesByCategory);
-      setTimeout(() => {
-        navigate(`/story/${storySlideId}`);
-      }, 0);
-    };
-    useEffect(() => {
-      localStorage.setItem("storyCardData", JSON.stringify(storyCardData));
-    }, [storyCardData]);
+  const [storyCardData, setStoryCardData] = useState();
+  const handleSlide = async (storySlideId) => {
+    const slidesByCategory = bookmarkedStories;
+    setStoryCardData(slidesByCategory);
+    setTimeout(() => {
+      navigate(`/story/${storySlideId}`);
+    }, 0);
+  };
+  useEffect(() => {
+    localStorage.setItem("storyCardData", JSON.stringify(storyCardData));
+  }, [storyCardData]);
   return (
     <>
       <ToastContainer
@@ -75,51 +75,51 @@ const Bookmark = () => {
       ) : (
         <div>
           <Navbar />
-    {!isLoading ? (
-      <div className={styles.storiesContainer}>
-        <h2 className={styles.categoryTitle}>Your Bookmarks</h2>
-        {bookmarkedStories.error === "No bookmarked slides found" ? (
-          <p>No bookmarked story</p>
-        ) : (
-          <div className={styles.storyBox}>
-            {bookmarkedStories
-              .slice(0, visibleStories)
-              .map((story, i) => (
-                <div
-                  key={i}
-                  className={styles.storyCard}
-                  onClick={() => handleSlide(story._id)}
-                >
-                  <img src={story.slideImageUrl} alt="foodpic" />
-                  <div className={styles.darkShadow}>
-                    <h3 className={styles.storyTitle}>
-                      {story.slideHeading}
-                    </h3>
-                    <h4 className={styles.storyDescription}>
-                      {story.slideDescription
-                        .split(" ")
-                        .slice(0, 16)
-                        .join(" ") + "..."}
-                    </h4>
-                  </div>
+          {!isLoading ? (
+            <div className={styles.storiesContainer}>
+              <h2 className={styles.categoryTitle}>Your Bookmarks</h2>
+              {bookmarkedStories.error === "No bookmarked slides found" ? (
+                <p>No bookmarked story</p>
+              ) : (
+                <div className={styles.storyBox}>
+                  {bookmarkedStories
+                    .slice(0, visibleStories)
+                    .map((story, i) => (
+                      <div
+                        key={i}
+                        className={styles.storyCard}
+                        onClick={() => handleSlide(story._id)}
+                      >
+                        <img src={story.slideImageUrl} alt="foodpic" />
+                        <div className={styles.darkShadow}>
+                          <h3 className={styles.storyTitle}>
+                            {story.slideHeading}
+                          </h3>
+                          <h4 className={styles.storyDescription}>
+                            {story.slideDescription
+                              .split(" ")
+                              .slice(0, 16)
+                              .join(" ") + "..."}
+                          </h4>
+                        </div>
+                      </div>
+                    ))}
                 </div>
-              ))}
-          </div>
-            )}
-            {bookmarkedStories.length > 4 && (
-              <div className={styles.seeMoreLess}>
-                {visibleStories === 4 ? (
-                  <button onClick={handleSeeMore} className={styles.seeMore}>
-                    See more
-                  </button>
-                ) : (
-                  <button onClick={handleSeeLess} className={styles.seeMore}>
-                    See less
-                  </button>
-                )}
-              </div>
-            )}
-          </div>
+              )}
+              {bookmarkedStories.length > 4 && (
+                <div className={styles.seeMoreLess}>
+                  {visibleStories === 4 ? (
+                    <button onClick={handleSeeMore} className={styles.seeMore}>
+                      See more
+                    </button>
+                  ) : (
+                    <button onClick={handleSeeLess} className={styles.seeMore}>
+                      See less
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
           ) : (
             <img
               src={loadingbar}

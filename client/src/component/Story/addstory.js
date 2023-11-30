@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import "./addstory.css";
+import styles from  "./addstory.module.css";
 import cancel from "../../assets/cancel.svg";
 import { useNavigate } from "react-router";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddStory = () => {
   const navigate = useNavigate();
@@ -47,7 +49,7 @@ const AddStory = () => {
       const jwtToken = localStorage.getItem("token");
 
       const response = await axios.post(
-        "https://swiptory-faqj.onrender.com/addstory",
+        "https://swiptory-faqj.onrender.com/api/story/addstory",
         { slides },
         {
           headers: {
