@@ -8,6 +8,7 @@ import Homepage from "./pages/Homepage";
 import StoryPage from "./pages/Storypage";
 import Loginpage from "./pages/Loginpage";
 import Registerpage from "./pages/Registerpage";
+import NotFound from "./component/Notfound/notfound";
 function App() {
   return (
     <BrowserRouter>
@@ -19,6 +20,7 @@ function App() {
         <Route path="/addstory" element={<AddStory />} />
         <Route path="/editstory/:id" element={<EditStory />} />
         <Route path="/bookmarked" element={<Bookmark />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import loadingbar from "../../assets/loading.gif"
 import { useNavigate } from "react-router";
+import backend_url from "../../apis/api";
 const Storybyuser = () => {
   const [stories, setStories] = useState([]);
   const [visibleSlides, setVisibleSlides] = useState(4);
@@ -17,7 +18,7 @@ const Storybyuser = () => {
       try {
         const jwtToken = localStorage.getItem("token");
         const response = await axios.get(
-          "https://swiptory-faqj.onrender.com/api/story/storiesbyuser",
+          `${backend_url}/api/story/storiesbyuser`,
           {
             headers: {
               Authorization: jwtToken,

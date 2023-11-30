@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import loadingbar from "../../assets/loading.gif";
+import backend_url from "../../apis/api";
 
 const Bookmark = () => {
   const [bookmarkedStories, setBookmarkedStories] = useState([]);
@@ -20,7 +21,7 @@ const Bookmark = () => {
       try {
         const jwtToken = localStorage.getItem("token");
         const response = await axios.get(
-          `https://swiptory-faqj.onrender.com/api/story/bookmark/bookmarkedslides`,
+          `${backend_url}/api/story/bookmark/bookmarkedslides`,
           {
             headers: {
               Authorization: jwtToken,

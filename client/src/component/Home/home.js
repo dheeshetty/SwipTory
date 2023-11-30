@@ -9,6 +9,7 @@ import loadingbar from "../../assets/loading.gif"
 import { Link } from "react-router-dom";
 import Storybyuser from "./storybyuser";
 import { useNavigate } from "react-router";
+import backend_url from "../../apis/api";
 
 const Home = () => {
   const [categories, setCategories] = useState({});
@@ -36,7 +37,7 @@ const Home = () => {
     async function fetchStoriesByUser() {
       const jwtToken = localStorage.getItem("token");
       try {
-        const response = await axios.get("https://swiptory-faqj.onrender.com/api/story/storiesbyuser", {
+        const response = await axios.get(`${backend_url}/api/story/storiesbyuser`, {
           headers: {
             Authorization: jwtToken,
           },

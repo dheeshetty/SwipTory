@@ -12,7 +12,8 @@ import likedIcon from "../../assets/likes.svg";
 import shareIcon from "../../assets/shareicon.svg";
 import cancelIcon from "../../assets/storycross.svg";
 import nonLikedIcon from "../../assets/nonLiked.svg";
-import nonBookmarkIcon from "../../assets/nonBookmarked.svg"
+import nonBookmarkIcon from "../../assets/nonBookmarked.svg";
+import backend_url from "../../apis/api";
 
 
 const StoryCard = () => {
@@ -103,8 +104,8 @@ const StoryCard = () => {
   }, [currentSlideIndex, enableAutoSlideChange]);
   const handleShare = () => {
     const currentSlideId = story[currentSlideIndex]._id;
-    const baseLink = process.env.REACT_APP_BASE_URL;
-    const linkToCopy = `http://localhost:3000/story/${currentSlideId}`;
+    const baseURL = process.env.REACT_APP_BASE_URL;
+    const linkToCopy = `${baseURL}/story/${currentSlideId}`;
 
     navigator.clipboard.writeText(linkToCopy).then(() => {
       setShowLinkShareBar(true);
@@ -131,7 +132,7 @@ const StoryCard = () => {
 
       const jwtToken = localStorage.getItem("token");
       const response = await axios.post(
-        `https://swiptory-faqj.onrender.com/api/story/bookmark/${currentSlideId}`,
+        `${backend_url}/api/story/bookmark/${currentSlideId}`,
         null,
         {
           headers: {
@@ -162,7 +163,7 @@ const StoryCard = () => {
       const currentSlideId = story[currentSlideIndex]._id;
       const jwtToken = localStorage.getItem("token");
       const response = await axios.post(
-        `https://swiptory-faqj.onrender.com/api/story/like//${currentSlideId}`,
+        `${backend_url}/api/story/like//${currentSlideId}`,
         null,
         {
           headers: {
@@ -187,7 +188,7 @@ const StoryCard = () => {
     const getUserBookmark = async () => {
       const jwtToken = localStorage.getItem("token");
       const response = await axios.get(
-        `https://swiptory-faqj.onrender.com/api/story/bookmark/${id}/isBookmarked`,
+        `${backend_url}/api/story/bookmark/${id}/isBookmarked`,
 
         {
           headers: {
@@ -202,7 +203,7 @@ const StoryCard = () => {
     const getUserLike = async () => {
       const jwtToken = localStorage.getItem("token");
       const response = await axios.get(
-        `https://swiptory-faqj.onrender.com/api/story/like/${id}/isLiked`,
+        `${backend_url}/api/story/like/${id}/isLiked`,
 
         {
           headers: {
@@ -216,7 +217,7 @@ const StoryCard = () => {
     getUserLike();
     const getSlideLikes = async () => {
       const likesResponse = await axios.get(
-        `https://swiptory-faqj.onrender.com/api/story/like/${id}`
+        `${backend_url}/api/story/like/${id}`
       );
       setLikesCount(likesResponse.data.likes);
     };

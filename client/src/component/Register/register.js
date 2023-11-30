@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import backend_url from "../../apis/api";
 const Register = () => {
   const [userData, setUserData] = useState({
     username: "",
@@ -26,7 +27,7 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-        "https://swiptory-faqj.onrender.com/api/auth/register",
+        `${backend_url}api/auth/register`,
         userData,
         {
           headers: {
